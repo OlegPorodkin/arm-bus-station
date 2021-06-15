@@ -41,6 +41,8 @@
     "rememberMeKey": "574018480719b8ff7992b0df3a7184c7adb4eb6f14beee075ff2a8a9ef46b4201c40437371a6445435c3d4105c1b84f1ea1e",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1623792749000,
+    "entities": ["Bus"]
   }
 }
