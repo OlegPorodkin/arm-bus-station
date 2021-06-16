@@ -8,6 +8,10 @@ import PassengerUpdateComponent from '@/entities/passenger/passenger-update.vue'
 import PassengerClass from '@/entities/passenger/passenger-update.component';
 import PassengerService from '@/entities/passenger/passenger.service';
 
+import RouteService from '@/entities/route/route.service';
+
+import TicketService from '@/entities/ticket/ticket.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +39,10 @@ describe('Component Tests', () => {
         router,
         provide: {
           passengerService: () => passengerServiceStub,
+
+          routeService: () => new RouteService(),
+
+          ticketService: () => new TicketService(),
         },
       });
       comp = wrapper.vm;

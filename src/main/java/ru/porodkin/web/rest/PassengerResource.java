@@ -53,6 +53,9 @@ public class PassengerResource {
         if (passengerDTO.getId() != null) {
             throw new BadRequestAlertException("A new passenger cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (Objects.isNull(passengerDTO.getTicket())) {
+            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
+        }
         PassengerDTO result = passengerService.save(passengerDTO);
         return ResponseEntity
             .created(new URI("/api/passengers/" + result.getId()))

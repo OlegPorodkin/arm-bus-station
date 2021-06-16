@@ -1,5 +1,6 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
@@ -31,6 +32,18 @@ public class Bus implements Serializable {
 
     @Column(name = "passenger_places")
     private Integer passengerPlaces;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "buses" }, allowSetters = true)
+    private Driver driver;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "buses" }, allowSetters = true)
+    private Counterpart counterpart;
+
+    @JsonIgnoreProperties(value = { "bus" }, allowSetters = true)
+    @OneToOne(mappedBy = "bus")
+    private Route route;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -96,6 +109,51 @@ public class Bus implements Serializable {
 
     public void setPassengerPlaces(Integer passengerPlaces) {
         this.passengerPlaces = passengerPlaces;
+    }
+
+    public Driver getDriver() {
+        return this.driver;
+    }
+
+    public Bus driver(Driver driver) {
+        this.setDriver(driver);
+        return this;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Counterpart getCounterpart() {
+        return this.counterpart;
+    }
+
+    public Bus counterpart(Counterpart counterpart) {
+        this.setCounterpart(counterpart);
+        return this;
+    }
+
+    public void setCounterpart(Counterpart counterpart) {
+        this.counterpart = counterpart;
+    }
+
+    public Route getRoute() {
+        return this.route;
+    }
+
+    public Bus route(Route route) {
+        this.setRoute(route);
+        return this;
+    }
+
+    public void setRoute(Route route) {
+        if (this.route != null) {
+            this.route.setBus(null);
+        }
+        if (route != null) {
+            route.setBus(this);
+        }
+        this.route = route;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

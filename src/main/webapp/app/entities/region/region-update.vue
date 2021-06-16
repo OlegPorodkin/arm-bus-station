@@ -44,6 +44,40 @@
               v-model="$v.region.description.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="region-country">Country</label>
+            <select class="form-control" id="region-country" data-cy="country" name="country" v-model="region.country">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="region.country && countryOption.id === region.country.id ? region.country : countryOption"
+                v-for="countryOption in countries"
+                :key="countryOption.id"
+              >
+                {{ countryOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="region-countryOfLocation">Country Of Location</label>
+            <select
+              class="form-control"
+              id="region-countryOfLocation"
+              data-cy="countryOfLocation"
+              name="countryOfLocation"
+              v-model="region.countryOfLocation"
+            >
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="
+                  region.countryOfLocation && countryOption.id === region.countryOfLocation.id ? region.countryOfLocation : countryOption
+                "
+                v-for="countryOption in countries"
+                :key="countryOption.id"
+              >
+                {{ countryOption.id }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

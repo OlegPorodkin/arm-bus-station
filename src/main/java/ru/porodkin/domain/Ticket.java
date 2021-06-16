@@ -1,5 +1,6 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
@@ -41,6 +42,10 @@ public class Ticket implements Serializable {
 
     @Column(name = "price")
     private Double price;
+
+    @JsonIgnoreProperties(value = { "route", "ticket" }, allowSetters = true)
+    @OneToOne(mappedBy = "ticket")
+    private Passenger passenger;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -145,6 +150,25 @@ public class Ticket implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Passenger getPassenger() {
+        return this.passenger;
+    }
+
+    public Ticket passenger(Passenger passenger) {
+        this.setPassenger(passenger);
+        return this;
+    }
+
+    public void setPassenger(Passenger passenger) {
+        if (this.passenger != null) {
+            this.passenger.setTicket(null);
+        }
+        if (passenger != null) {
+            passenger.setTicket(this);
+        }
+        this.passenger = passenger;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

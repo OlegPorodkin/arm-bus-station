@@ -28,6 +28,24 @@
           <dd>
             <span>{{ bus.passengerPlaces }}</span>
           </dd>
+          <dt>
+            <span>Driver</span>
+          </dt>
+          <dd>
+            <div v-if="bus.driver">
+              <router-link :to="{ name: 'DriverView', params: { driverId: bus.driver.id } }">{{ bus.driver.id }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span>Counterpart</span>
+          </dt>
+          <dd>
+            <div v-if="bus.counterpart">
+              <router-link :to="{ name: 'CounterpartView', params: { counterpartId: bus.counterpart.id } }">{{
+                bus.counterpart.id
+              }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

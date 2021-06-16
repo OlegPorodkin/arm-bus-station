@@ -20,6 +20,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import ru.porodkin.IntegrationTest;
 import ru.porodkin.domain.Bus;
+import ru.porodkin.domain.Counterpart;
+import ru.porodkin.domain.Driver;
+import ru.porodkin.domain.Route;
 import ru.porodkin.repository.BusRepository;
 import ru.porodkin.service.criteria.BusCriteria;
 import ru.porodkin.service.dto.BusDTO;
@@ -534,6 +537,64 @@ class BusResourceIT {
 
         // Get all the busList where passengerPlaces is greater than SMALLER_PASSENGER_PLACES
         defaultBusShouldBeFound("passengerPlaces.greaterThan=" + SMALLER_PASSENGER_PLACES);
+    }
+
+    @Test
+    @Transactional
+    void getAllBusesByDriverIsEqualToSomething() throws Exception {
+        // Initialize the database
+        busRepository.saveAndFlush(bus);
+        Driver driver = DriverResourceIT.createEntity(em);
+        em.persist(driver);
+        em.flush();
+        bus.setDriver(driver);
+        busRepository.saveAndFlush(bus);
+        Long driverId = driver.getId();
+
+        // Get all the busList where driver equals to driverId
+        defaultBusShouldBeFound("driverId.equals=" + driverId);
+
+        // Get all the busList where driver equals to (driverId + 1)
+        defaultBusShouldNotBeFound("driverId.equals=" + (driverId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllBusesByCounterpartIsEqualToSomething() throws Exception {
+        // Initialize the database
+        busRepository.saveAndFlush(bus);
+        Counterpart counterpart = CounterpartResourceIT.createEntity(em);
+        em.persist(counterpart);
+        em.flush();
+        bus.setCounterpart(counterpart);
+        busRepository.saveAndFlush(bus);
+        Long counterpartId = counterpart.getId();
+
+        // Get all the busList where counterpart equals to counterpartId
+        defaultBusShouldBeFound("counterpartId.equals=" + counterpartId);
+
+        // Get all the busList where counterpart equals to (counterpartId + 1)
+        defaultBusShouldNotBeFound("counterpartId.equals=" + (counterpartId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllBusesByRouteIsEqualToSomething() throws Exception {
+        // Initialize the database
+        busRepository.saveAndFlush(bus);
+        Route route = RouteResourceIT.createEntity(em);
+        em.persist(route);
+        em.flush();
+        bus.setRoute(route);
+        route.setBus(bus);
+        busRepository.saveAndFlush(bus);
+        Long routeId = route.getId();
+
+        // Get all the busList where route equals to routeId
+        defaultBusShouldBeFound("routeId.equals=" + routeId);
+
+        // Get all the busList where route equals to (routeId + 1)
+        defaultBusShouldNotBeFound("routeId.equals=" + (routeId + 1));
     }
 
     /**

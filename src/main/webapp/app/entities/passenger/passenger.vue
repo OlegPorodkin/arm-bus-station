@@ -37,6 +37,8 @@
             <th scope="row"><span>Sex</span></th>
             <th scope="row"><span>Phone</span></th>
             <th scope="row"><span>Citizenship</span></th>
+            <th scope="row"><span>Route</span></th>
+            <th scope="row"><span>Ticket</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -54,6 +56,16 @@
             <td>{{ passenger.sex }}</td>
             <td>{{ passenger.phone }}</td>
             <td>{{ passenger.citizenship }}</td>
+            <td>
+              <div v-if="passenger.route">
+                <router-link :to="{ name: 'RouteView', params: { routeId: passenger.route.id } }">{{ passenger.route.id }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="passenger.ticket">
+                <router-link :to="{ name: 'TicketView', params: { ticketId: passenger.ticket.id } }">{{ passenger.ticket.id }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'PassengerView', params: { passengerId: passenger.id } }" custom v-slot="{ navigate }">

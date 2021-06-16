@@ -1,3 +1,5 @@
+import { IBus } from '@/shared/model/bus.model';
+
 export interface IRoute {
   id?: number;
   uuid?: string | null;
@@ -9,6 +11,7 @@ export interface IRoute {
   platform?: string | null;
   routStatus?: string | null;
   description?: string | null;
+  bus?: IBus | null;
 }
 
 export class Route implements IRoute {
@@ -22,6 +25,7 @@ export class Route implements IRoute {
     public timeRegistration?: Date | null,
     public platform?: string | null,
     public routStatus?: string | null,
-    public description?: string | null
+    public description?: string | null,
+    public bus?: IBus | null
   ) {}
 }

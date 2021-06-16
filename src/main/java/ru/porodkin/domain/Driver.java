@@ -1,6 +1,9 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -31,6 +34,11 @@ public class Driver implements Serializable {
 
     @Column(name = "driver_license")
     private String driverLicense;
+
+    @OneToMany(mappedBy = "driver")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "driver", "counterpart", "route" }, allowSetters = true)
+    private Set<Bus> buses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -96,6 +104,37 @@ public class Driver implements Serializable {
 
     public void setDriverLicense(String driverLicense) {
         this.driverLicense = driverLicense;
+    }
+
+    public Set<Bus> getBuses() {
+        return this.buses;
+    }
+
+    public Driver buses(Set<Bus> buses) {
+        this.setBuses(buses);
+        return this;
+    }
+
+    public Driver addBuses(Bus bus) {
+        this.buses.add(bus);
+        bus.setDriver(this);
+        return this;
+    }
+
+    public Driver removeBuses(Bus bus) {
+        this.buses.remove(bus);
+        bus.setDriver(null);
+        return this;
+    }
+
+    public void setBuses(Set<Bus> buses) {
+        if (this.buses != null) {
+            this.buses.forEach(i -> i.setDriver(null));
+        }
+        if (buses != null) {
+            buses.forEach(i -> i.setDriver(this));
+        }
+        this.buses = buses;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -1,5 +1,8 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import BusService from '@/entities/bus/bus.service';
+import { IBus } from '@/shared/model/bus.model';
+
 import { ICounterpart, Counterpart } from '@/shared/model/counterpart.model';
 import CounterpartService from './counterpart.service';
 
@@ -24,6 +27,10 @@ const validations: any = {
 export default class CounterpartUpdate extends Vue {
   @Inject('counterpartService') private counterpartService: () => CounterpartService;
   public counterpart: ICounterpart = new Counterpart();
+
+  @Inject('busService') private busService: () => BusService;
+
+  public buses: IBus[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -32,6 +39,7 @@ export default class CounterpartUpdate extends Vue {
       if (to.params.counterpartId) {
         vm.retrieveCounterpart(to.params.counterpartId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -92,5 +100,11 @@ export default class CounterpartUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.busService()
+      .retrieve()
+      .then(res => {
+        this.buses = res.data;
+      });
+  }
 }

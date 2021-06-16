@@ -53,6 +53,9 @@ public class RouteResource {
         if (routeDTO.getId() != null) {
             throw new BadRequestAlertException("A new route cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (Objects.isNull(routeDTO.getBus())) {
+            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
+        }
         RouteDTO result = routeService.save(routeDTO);
         return ResponseEntity
             .created(new URI("/api/routes/" + result.getId()))

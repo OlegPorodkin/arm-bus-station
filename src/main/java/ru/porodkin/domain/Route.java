@@ -1,5 +1,6 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -18,8 +19,6 @@ public class Route implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "uuid")
@@ -48,6 +47,12 @@ public class Route implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @JsonIgnoreProperties(value = { "driver", "counterpart", "route" }, allowSetters = true)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private Bus bus;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -178,6 +183,19 @@ public class Route implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Bus getBus() {
+        return this.bus;
+    }
+
+    public Route bus(Bus bus) {
+        this.setBus(bus);
+        return this;
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

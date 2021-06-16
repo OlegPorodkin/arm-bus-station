@@ -29,7 +29,15 @@
       "fieldType": "Double"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "passenger",
+      "otherEntityName": "passenger",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "ticket"
+    }
+  ],
   "service": "serviceImpl",
   "dto": "mapstruct",
   "jpaMetamodelFiltering": false,

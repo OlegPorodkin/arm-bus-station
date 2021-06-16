@@ -8,6 +8,8 @@ import DriverUpdateComponent from '@/entities/driver/driver-update.vue';
 import DriverClass from '@/entities/driver/driver-update.component';
 import DriverService from '@/entities/driver/driver.service';
 
+import BusService from '@/entities/bus/bus.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +37,8 @@ describe('Component Tests', () => {
         router,
         provide: {
           driverService: () => driverServiceStub,
+
+          busService: () => new BusService(),
         },
       });
       comp = wrapper.vm;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.porodkin.domain.Passenger;
 import ru.porodkin.repository.PassengerRepository;
+import ru.porodkin.repository.TicketRepository;
 import ru.porodkin.service.PassengerService;
 import ru.porodkin.service.dto.PassengerDTO;
 import ru.porodkin.service.mapper.PassengerMapper;
@@ -27,15 +28,24 @@ public class PassengerServiceImpl implements PassengerService {
 
     private final PassengerMapper passengerMapper;
 
-    public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerMapper passengerMapper) {
+    private final TicketRepository ticketRepository;
+
+    public PassengerServiceImpl(
+        PassengerRepository passengerRepository,
+        PassengerMapper passengerMapper,
+        TicketRepository ticketRepository
+    ) {
         this.passengerRepository = passengerRepository;
         this.passengerMapper = passengerMapper;
+        this.ticketRepository = ticketRepository;
     }
 
     @Override
     public PassengerDTO save(PassengerDTO passengerDTO) {
         log.debug("Request to save Passenger : {}", passengerDTO);
         Passenger passenger = passengerMapper.toEntity(passengerDTO);
+        Long ticketId = passengerDTO.getTicket().getId();
+        ticketRepository.findById(ticketId).ifPresent(passenger::ticket);
         passenger = passengerRepository.save(passenger);
         return passengerMapper.toDto(passenger);
     }

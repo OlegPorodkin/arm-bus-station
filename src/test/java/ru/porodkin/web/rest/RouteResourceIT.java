@@ -25,6 +25,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import ru.porodkin.IntegrationTest;
+import ru.porodkin.domain.Bus;
 import ru.porodkin.domain.Route;
 import ru.porodkin.repository.RouteRepository;
 import ru.porodkin.service.dto.RouteDTO;
@@ -102,6 +103,16 @@ class RouteResourceIT {
             .platform(DEFAULT_PLATFORM)
             .routStatus(DEFAULT_ROUT_STATUS)
             .description(DEFAULT_DESCRIPTION);
+        // Add required entity
+        Bus bus;
+        if (TestUtil.findAll(em, Bus.class).isEmpty()) {
+            bus = BusResourceIT.createEntity(em);
+            em.persist(bus);
+            em.flush();
+        } else {
+            bus = TestUtil.findAll(em, Bus.class).get(0);
+        }
+        route.setBus(bus);
         return route;
     }
 
@@ -122,6 +133,16 @@ class RouteResourceIT {
             .platform(UPDATED_PLATFORM)
             .routStatus(UPDATED_ROUT_STATUS)
             .description(UPDATED_DESCRIPTION);
+        // Add required entity
+        Bus bus;
+        if (TestUtil.findAll(em, Bus.class).isEmpty()) {
+            bus = BusResourceIT.createUpdatedEntity(em);
+            em.persist(bus);
+            em.flush();
+        } else {
+            bus = TestUtil.findAll(em, Bus.class).get(0);
+        }
+        route.setBus(bus);
         return route;
     }
 
@@ -158,6 +179,9 @@ class RouteResourceIT {
         assertThat(testRoute.getPlatform()).isEqualTo(DEFAULT_PLATFORM);
         assertThat(testRoute.getRoutStatus()).isEqualTo(DEFAULT_ROUT_STATUS);
         assertThat(testRoute.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+
+        // Validate the id for MapsId, the ids must be same
+        assertThat(testRoute.getId()).isEqualTo(testRoute.getBus().getId());
     }
 
     @Test
@@ -182,6 +206,49 @@ class RouteResourceIT {
         // Validate the Route in the database
         List<Route> routeList = routeRepository.findAll();
         assertThat(routeList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    void updateRouteMapsIdAssociationWithNewId() throws Exception {
+        // Initialize the database
+        routeRepository.saveAndFlush(route);
+        int databaseSizeBeforeCreate = routeRepository.findAll().size();
+
+        // Add a new parent entity
+        Bus bus = BusResourceIT.createUpdatedEntity(em);
+        em.persist(bus);
+        em.flush();
+
+        // Load the route
+        Route updatedRoute = routeRepository.findById(route.getId()).get();
+        assertThat(updatedRoute).isNotNull();
+        // Disconnect from session so that the updates on updatedRoute are not directly saved in db
+        em.detach(updatedRoute);
+
+        // Update the Bus with new association value
+        updatedRoute.setBus(bus);
+        RouteDTO updatedRouteDTO = routeMapper.toDto(updatedRoute);
+        assertThat(updatedRouteDTO).isNotNull();
+
+        // Update the entity
+        restRouteMockMvc
+            .perform(
+                put(ENTITY_API_URL_ID, updatedRouteDTO.getId())
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(updatedRouteDTO))
+            )
+            .andExpect(status().isOk());
+
+        // Validate the Route in the database
+        List<Route> routeList = routeRepository.findAll();
+        assertThat(routeList).hasSize(databaseSizeBeforeCreate);
+        Route testRoute = routeList.get(routeList.size() - 1);
+        // Validate the id for MapsId, the ids must be same
+        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
+        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
+        // assertThat(testRoute.getId()).isEqualTo(testRoute.getBus().getId());
     }
 
     @Test

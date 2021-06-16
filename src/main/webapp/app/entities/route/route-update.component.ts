@@ -3,6 +3,9 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 import dayjs from 'dayjs';
 import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
 
+import BusService from '@/entities/bus/bus.service';
+import { IBus } from '@/shared/model/bus.model';
+
 import { IRoute, Route } from '@/shared/model/route.model';
 import RouteService from './route.service';
 
@@ -26,6 +29,10 @@ const validations: any = {
 export default class RouteUpdate extends Vue {
   @Inject('routeService') private routeService: () => RouteService;
   public route: IRoute = new Route();
+
+  @Inject('busService') private busService: () => BusService;
+
+  public buses: IBus[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -34,6 +41,7 @@ export default class RouteUpdate extends Vue {
       if (to.params.routeId) {
         vm.retrieveRoute(to.params.routeId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -122,5 +130,11 @@ export default class RouteUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.busService()
+      .retrieve()
+      .then(res => {
+        this.buses = res.data;
+      });
+  }
 }

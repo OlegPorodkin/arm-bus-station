@@ -7,5 +7,14 @@ import ru.porodkin.service.dto.RouteDTO;
 /**
  * Mapper for the entity {@link Route} and its DTO {@link RouteDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
-public interface RouteMapper extends EntityMapper<RouteDTO, Route> {}
+@Mapper(componentModel = "spring", uses = { BusMapper.class })
+public interface RouteMapper extends EntityMapper<RouteDTO, Route> {
+    @Mapping(target = "bus", source = "bus", qualifiedByName = "id")
+    RouteDTO toDto(Route s);
+
+    @Named("id")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "bus", source = "bus")
+    RouteDTO toDtoId(Route route);
+}

@@ -8,6 +8,8 @@ import RegionUpdateComponent from '@/entities/region/region-update.vue';
 import RegionClass from '@/entities/region/region-update.component';
 import RegionService from '@/entities/region/region.service';
 
+import CountryService from '@/entities/country/country.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +37,8 @@ describe('Component Tests', () => {
         router,
         provide: {
           regionService: () => regionServiceStub,
+
+          countryService: () => new CountryService(),
         },
       });
       comp = wrapper.vm;

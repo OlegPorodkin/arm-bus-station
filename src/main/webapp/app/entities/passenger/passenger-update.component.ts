@@ -1,5 +1,11 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import RouteService from '@/entities/route/route.service';
+import { IRoute } from '@/shared/model/route.model';
+
+import TicketService from '@/entities/ticket/ticket.service';
+import { ITicket } from '@/shared/model/ticket.model';
+
 import { IPassenger, Passenger } from '@/shared/model/passenger.model';
 import PassengerService from './passenger.service';
 
@@ -23,6 +29,14 @@ const validations: any = {
 export default class PassengerUpdate extends Vue {
   @Inject('passengerService') private passengerService: () => PassengerService;
   public passenger: IPassenger = new Passenger();
+
+  @Inject('routeService') private routeService: () => RouteService;
+
+  public routes: IRoute[] = [];
+
+  @Inject('ticketService') private ticketService: () => TicketService;
+
+  public tickets: ITicket[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -31,6 +45,7 @@ export default class PassengerUpdate extends Vue {
       if (to.params.passengerId) {
         vm.retrievePassenger(to.params.passengerId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -91,5 +106,16 @@ export default class PassengerUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.routeService()
+      .retrieve()
+      .then(res => {
+        this.routes = res.data;
+      });
+    this.ticketService()
+      .retrieve()
+      .then(res => {
+        this.tickets = res.data;
+      });
+  }
 }

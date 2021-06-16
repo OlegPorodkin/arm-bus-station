@@ -30,6 +30,12 @@ public interface TicketService {
      * @return the list of entities.
      */
     List<TicketDTO> findAll();
+    /**
+     * Get all the TicketDTO where Passenger is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<TicketDTO> findAllWherePassengerIsNull();
 
     /**
      * Get the "id" ticket.

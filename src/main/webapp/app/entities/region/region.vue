@@ -31,6 +31,8 @@
             <th scope="row"><span>Uuid</span></th>
             <th scope="row"><span>Name</span></th>
             <th scope="row"><span>Description</span></th>
+            <th scope="row"><span>Country</span></th>
+            <th scope="row"><span>Country Of Location</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -42,6 +44,18 @@
             <td>{{ region.uuid }}</td>
             <td>{{ region.name }}</td>
             <td>{{ region.description }}</td>
+            <td>
+              <div v-if="region.country">
+                <router-link :to="{ name: 'CountryView', params: { countryId: region.country.id } }">{{ region.country.id }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="region.countryOfLocation">
+                <router-link :to="{ name: 'CountryView', params: { countryId: region.countryOfLocation.id } }">{{
+                  region.countryOfLocation.id
+                }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'RegionView', params: { regionId: region.id } }" custom v-slot="{ navigate }">

@@ -1,5 +1,6 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
@@ -17,8 +18,6 @@ public class Passenger implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "uuid")
@@ -47,6 +46,16 @@ public class Passenger implements Serializable {
 
     @Column(name = "citizenship")
     private String citizenship;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "bus" }, allowSetters = true)
+    private Route route;
+
+    @JsonIgnoreProperties(value = { "passenger" }, allowSetters = true)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private Ticket ticket;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -177,6 +186,32 @@ public class Passenger implements Serializable {
 
     public void setCitizenship(String citizenship) {
         this.citizenship = citizenship;
+    }
+
+    public Route getRoute() {
+        return this.route;
+    }
+
+    public Passenger route(Route route) {
+        this.setRoute(route);
+        return this;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public Ticket getTicket() {
+        return this.ticket;
+    }
+
+    public Passenger ticket(Ticket ticket) {
+        this.setTicket(ticket);
+        return this;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

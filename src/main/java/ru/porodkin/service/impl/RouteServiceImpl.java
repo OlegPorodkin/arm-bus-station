@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.porodkin.domain.Route;
+import ru.porodkin.repository.BusRepository;
 import ru.porodkin.repository.RouteRepository;
 import ru.porodkin.service.RouteService;
 import ru.porodkin.service.dto.RouteDTO;
@@ -27,15 +28,20 @@ public class RouteServiceImpl implements RouteService {
 
     private final RouteMapper routeMapper;
 
-    public RouteServiceImpl(RouteRepository routeRepository, RouteMapper routeMapper) {
+    private final BusRepository busRepository;
+
+    public RouteServiceImpl(RouteRepository routeRepository, RouteMapper routeMapper, BusRepository busRepository) {
         this.routeRepository = routeRepository;
         this.routeMapper = routeMapper;
+        this.busRepository = busRepository;
     }
 
     @Override
     public RouteDTO save(RouteDTO routeDTO) {
         log.debug("Request to save Route : {}", routeDTO);
         Route route = routeMapper.toEntity(routeDTO);
+        Long busId = routeDTO.getBus().getId();
+        busRepository.findById(busId).ifPresent(route::bus);
         route = routeRepository.save(route);
         return routeMapper.toDto(route);
     }

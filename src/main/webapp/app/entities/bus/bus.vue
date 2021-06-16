@@ -27,6 +27,8 @@
             <th scope="row"><span>Number</span></th>
             <th scope="row"><span>Description</span></th>
             <th scope="row"><span>Passenger Places</span></th>
+            <th scope="row"><span>Driver</span></th>
+            <th scope="row"><span>Counterpart</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -39,6 +41,18 @@
             <td>{{ bus.number }}</td>
             <td>{{ bus.description }}</td>
             <td>{{ bus.passengerPlaces }}</td>
+            <td>
+              <div v-if="bus.driver">
+                <router-link :to="{ name: 'DriverView', params: { driverId: bus.driver.id } }">{{ bus.driver.id }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="bus.counterpart">
+                <router-link :to="{ name: 'CounterpartView', params: { counterpartId: bus.counterpart.id } }">{{
+                  bus.counterpart.id
+                }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'BusView', params: { busId: bus.id } }" custom v-slot="{ navigate }">

@@ -56,6 +56,32 @@
               v-model.number="$v.bus.passengerPlaces.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="bus-driver">Driver</label>
+            <select class="form-control" id="bus-driver" data-cy="driver" name="driver" v-model="bus.driver">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="bus.driver && driverOption.id === bus.driver.id ? bus.driver : driverOption"
+                v-for="driverOption in drivers"
+                :key="driverOption.id"
+              >
+                {{ driverOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="bus-counterpart">Counterpart</label>
+            <select class="form-control" id="bus-counterpart" data-cy="counterpart" name="counterpart" v-model="bus.counterpart">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="bus.counterpart && counterpartOption.id === bus.counterpart.id ? bus.counterpart : counterpartOption"
+                v-for="counterpartOption in counterparts"
+                :key="counterpartOption.id"
+              >
+                {{ counterpartOption.id }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

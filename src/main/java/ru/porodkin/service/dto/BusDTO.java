@@ -18,6 +18,10 @@ public class BusDTO implements Serializable {
 
     private Integer passengerPlaces;
 
+    private DriverDTO driver;
+
+    private CounterpartDTO counterpart;
+
     public Long getId() {
         return id;
     }
@@ -58,6 +62,22 @@ public class BusDTO implements Serializable {
         this.passengerPlaces = passengerPlaces;
     }
 
+    public DriverDTO getDriver() {
+        return driver;
+    }
+
+    public void setDriver(DriverDTO driver) {
+        this.driver = driver;
+    }
+
+    public CounterpartDTO getCounterpart() {
+        return counterpart;
+    }
+
+    public void setCounterpart(CounterpartDTO counterpart) {
+        this.counterpart = counterpart;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,6 +108,8 @@ public class BusDTO implements Serializable {
             ", number='" + getNumber() + "'" +
             ", description='" + getDescription() + "'" +
             ", passengerPlaces=" + getPassengerPlaces() +
+            ", driver=" + getDriver() +
+            ", counterpart=" + getCounterpart() +
             "}";
     }
 }

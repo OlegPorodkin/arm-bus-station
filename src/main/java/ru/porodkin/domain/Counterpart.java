@@ -1,6 +1,9 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -49,6 +52,11 @@ public class Counterpart implements Serializable {
 
     @Column(name = "country")
     private String country;
+
+    @OneToMany(mappedBy = "counterpart")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "driver", "counterpart", "route" }, allowSetters = true)
+    private Set<Bus> buses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -192,6 +200,37 @@ public class Counterpart implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Set<Bus> getBuses() {
+        return this.buses;
+    }
+
+    public Counterpart buses(Set<Bus> buses) {
+        this.setBuses(buses);
+        return this;
+    }
+
+    public Counterpart addBus(Bus bus) {
+        this.buses.add(bus);
+        bus.setCounterpart(this);
+        return this;
+    }
+
+    public Counterpart removeBus(Bus bus) {
+        this.buses.remove(bus);
+        bus.setCounterpart(null);
+        return this;
+    }
+
+    public void setBuses(Set<Bus> buses) {
+        if (this.buses != null) {
+            this.buses.forEach(i -> i.setCounterpart(null));
+        }
+        if (buses != null) {
+            buses.forEach(i -> i.setCounterpart(this));
+        }
+        this.buses = buses;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

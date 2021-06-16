@@ -37,6 +37,7 @@
             <th scope="row"><span>Platform</span></th>
             <th scope="row"><span>Rout Status</span></th>
             <th scope="row"><span>Description</span></th>
+            <th scope="row"><span>Bus</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -54,6 +55,11 @@
             <td>{{ route.platform }}</td>
             <td>{{ route.routStatus }}</td>
             <td>{{ route.description }}</td>
+            <td>
+              <div v-if="route.bus">
+                <router-link :to="{ name: 'BusView', params: { busId: route.bus.id } }">{{ route.bus.id }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'RouteView', params: { routeId: route.id } }" custom v-slot="{ navigate }">

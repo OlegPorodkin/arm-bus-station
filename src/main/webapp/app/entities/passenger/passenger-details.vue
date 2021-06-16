@@ -58,6 +58,22 @@
           <dd>
             <span>{{ passenger.citizenship }}</span>
           </dd>
+          <dt>
+            <span>Route</span>
+          </dt>
+          <dd>
+            <div v-if="passenger.route">
+              <router-link :to="{ name: 'RouteView', params: { routeId: passenger.route.id } }">{{ passenger.route.id }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span>Ticket</span>
+          </dt>
+          <dd>
+            <div v-if="passenger.ticket">
+              <router-link :to="{ name: 'TicketView', params: { ticketId: passenger.ticket.id } }">{{ passenger.ticket.id }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

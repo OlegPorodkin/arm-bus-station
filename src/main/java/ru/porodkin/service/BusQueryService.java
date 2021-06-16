@@ -98,6 +98,27 @@ public class BusQueryService extends QueryService<Bus> {
             if (criteria.getPassengerPlaces() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPassengerPlaces(), Bus_.passengerPlaces));
             }
+            if (criteria.getDriverId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getDriverId(), root -> root.join(Bus_.driver, JoinType.LEFT).get(Driver_.id))
+                    );
+            }
+            if (criteria.getCounterpartId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getCounterpartId(),
+                            root -> root.join(Bus_.counterpart, JoinType.LEFT).get(Counterpart_.id)
+                        )
+                    );
+            }
+            if (criteria.getRouteId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getRouteId(), root -> root.join(Bus_.route, JoinType.LEFT).get(Route_.id))
+                    );
+            }
         }
         return specification;
     }

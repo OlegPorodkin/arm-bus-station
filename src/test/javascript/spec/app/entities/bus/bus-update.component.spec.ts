@@ -8,6 +8,12 @@ import BusUpdateComponent from '@/entities/bus/bus-update.vue';
 import BusClass from '@/entities/bus/bus-update.component';
 import BusService from '@/entities/bus/bus.service';
 
+import DriverService from '@/entities/driver/driver.service';
+
+import CounterpartService from '@/entities/counterpart/counterpart.service';
+
+import RouteService from '@/entities/route/route.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +41,12 @@ describe('Component Tests', () => {
         router,
         provide: {
           busService: () => busServiceStub,
+
+          driverService: () => new DriverService(),
+
+          counterpartService: () => new CounterpartService(),
+
+          routeService: () => new RouteService(),
         },
       });
       comp = wrapper.vm;

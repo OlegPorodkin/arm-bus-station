@@ -131,6 +131,19 @@
               v-model="$v.route.description.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="route-bus">Bus</label>
+            <select class="form-control" id="route-bus" data-cy="bus" name="bus" v-model="route.bus">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="route.bus && busOption.id === route.bus.id ? route.bus : busOption"
+                v-for="busOption in buses"
+                :key="busOption.id"
+              >
+                {{ busOption.id }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

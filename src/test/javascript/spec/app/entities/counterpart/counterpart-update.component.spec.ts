@@ -8,6 +8,8 @@ import CounterpartUpdateComponent from '@/entities/counterpart/counterpart-updat
 import CounterpartClass from '@/entities/counterpart/counterpart-update.component';
 import CounterpartService from '@/entities/counterpart/counterpart.service';
 
+import BusService from '@/entities/bus/bus.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +37,8 @@ describe('Component Tests', () => {
         router,
         provide: {
           counterpartService: () => counterpartServiceStub,
+
+          busService: () => new BusService(),
         },
       });
       comp = wrapper.vm;

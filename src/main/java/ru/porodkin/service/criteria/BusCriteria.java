@@ -34,6 +34,12 @@ public class BusCriteria implements Serializable, Criteria {
 
     private IntegerFilter passengerPlaces;
 
+    private LongFilter driverId;
+
+    private LongFilter counterpartId;
+
+    private LongFilter routeId;
+
     public BusCriteria() {}
 
     public BusCriteria(BusCriteria other) {
@@ -42,6 +48,9 @@ public class BusCriteria implements Serializable, Criteria {
         this.number = other.number == null ? null : other.number.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.passengerPlaces = other.passengerPlaces == null ? null : other.passengerPlaces.copy();
+        this.driverId = other.driverId == null ? null : other.driverId.copy();
+        this.counterpartId = other.counterpartId == null ? null : other.counterpartId.copy();
+        this.routeId = other.routeId == null ? null : other.routeId.copy();
     }
 
     @Override
@@ -124,6 +133,51 @@ public class BusCriteria implements Serializable, Criteria {
         this.passengerPlaces = passengerPlaces;
     }
 
+    public LongFilter getDriverId() {
+        return driverId;
+    }
+
+    public LongFilter driverId() {
+        if (driverId == null) {
+            driverId = new LongFilter();
+        }
+        return driverId;
+    }
+
+    public void setDriverId(LongFilter driverId) {
+        this.driverId = driverId;
+    }
+
+    public LongFilter getCounterpartId() {
+        return counterpartId;
+    }
+
+    public LongFilter counterpartId() {
+        if (counterpartId == null) {
+            counterpartId = new LongFilter();
+        }
+        return counterpartId;
+    }
+
+    public void setCounterpartId(LongFilter counterpartId) {
+        this.counterpartId = counterpartId;
+    }
+
+    public LongFilter getRouteId() {
+        return routeId;
+    }
+
+    public LongFilter routeId() {
+        if (routeId == null) {
+            routeId = new LongFilter();
+        }
+        return routeId;
+    }
+
+    public void setRouteId(LongFilter routeId) {
+        this.routeId = routeId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -138,13 +192,16 @@ public class BusCriteria implements Serializable, Criteria {
             Objects.equals(model, that.model) &&
             Objects.equals(number, that.number) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(passengerPlaces, that.passengerPlaces)
+            Objects.equals(passengerPlaces, that.passengerPlaces) &&
+            Objects.equals(driverId, that.driverId) &&
+            Objects.equals(counterpartId, that.counterpartId) &&
+            Objects.equals(routeId, that.routeId)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, number, description, passengerPlaces);
+        return Objects.hash(id, model, number, description, passengerPlaces, driverId, counterpartId, routeId);
     }
 
     // prettier-ignore
@@ -156,6 +213,9 @@ public class BusCriteria implements Serializable, Criteria {
             (number != null ? "number=" + number + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
             (passengerPlaces != null ? "passengerPlaces=" + passengerPlaces + ", " : "") +
+            (driverId != null ? "driverId=" + driverId + ", " : "") +
+            (counterpartId != null ? "counterpartId=" + counterpartId + ", " : "") +
+            (routeId != null ? "routeId=" + routeId + ", " : "") +
             "}";
     }
 }

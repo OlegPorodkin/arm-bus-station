@@ -132,6 +132,32 @@
               v-model="$v.passenger.citizenship.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="passenger-route">Route</label>
+            <select class="form-control" id="passenger-route" data-cy="route" name="route" v-model="passenger.route">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="passenger.route && routeOption.id === passenger.route.id ? passenger.route : routeOption"
+                v-for="routeOption in routes"
+                :key="routeOption.id"
+              >
+                {{ routeOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="passenger-ticket">Ticket</label>
+            <select class="form-control" id="passenger-ticket" data-cy="ticket" name="ticket" v-model="passenger.ticket">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="passenger.ticket && ticketOption.id === passenger.ticket.id ? passenger.ticket : ticketOption"
+                v-for="ticketOption in tickets"
+                :key="ticketOption.id"
+              >
+                {{ ticketOption.id }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

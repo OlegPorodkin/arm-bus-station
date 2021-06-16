@@ -1,5 +1,14 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import DriverService from '@/entities/driver/driver.service';
+import { IDriver } from '@/shared/model/driver.model';
+
+import CounterpartService from '@/entities/counterpart/counterpart.service';
+import { ICounterpart } from '@/shared/model/counterpart.model';
+
+import RouteService from '@/entities/route/route.service';
+import { IRoute } from '@/shared/model/route.model';
+
 import { IBus, Bus } from '@/shared/model/bus.model';
 import BusService from './bus.service';
 
@@ -18,6 +27,18 @@ const validations: any = {
 export default class BusUpdate extends Vue {
   @Inject('busService') private busService: () => BusService;
   public bus: IBus = new Bus();
+
+  @Inject('driverService') private driverService: () => DriverService;
+
+  public drivers: IDriver[] = [];
+
+  @Inject('counterpartService') private counterpartService: () => CounterpartService;
+
+  public counterparts: ICounterpart[] = [];
+
+  @Inject('routeService') private routeService: () => RouteService;
+
+  public routes: IRoute[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -26,6 +47,7 @@ export default class BusUpdate extends Vue {
       if (to.params.busId) {
         vm.retrieveBus(to.params.busId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -86,5 +108,21 @@ export default class BusUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.driverService()
+      .retrieve()
+      .then(res => {
+        this.drivers = res.data;
+      });
+    this.counterpartService()
+      .retrieve()
+      .then(res => {
+        this.counterparts = res.data;
+      });
+    this.routeService()
+      .retrieve()
+      .then(res => {
+        this.routes = res.data;
+      });
+  }
 }

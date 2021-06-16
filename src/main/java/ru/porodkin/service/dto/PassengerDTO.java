@@ -29,6 +29,10 @@ public class PassengerDTO implements Serializable {
 
     private String citizenship;
 
+    private RouteDTO route;
+
+    private TicketDTO ticket;
+
     public Long getId() {
         return id;
     }
@@ -109,6 +113,22 @@ public class PassengerDTO implements Serializable {
         this.citizenship = citizenship;
     }
 
+    public RouteDTO getRoute() {
+        return route;
+    }
+
+    public void setRoute(RouteDTO route) {
+        this.route = route;
+    }
+
+    public TicketDTO getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(TicketDTO ticket) {
+        this.ticket = ticket;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -144,6 +164,8 @@ public class PassengerDTO implements Serializable {
             ", sex='" + getSex() + "'" +
             ", phone='" + getPhone() + "'" +
             ", citizenship='" + getCitizenship() + "'" +
+            ", route=" + getRoute() +
+            ", ticket=" + getTicket() +
             "}";
     }
 }

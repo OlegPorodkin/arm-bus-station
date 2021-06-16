@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,20 @@ public class TicketServiceImpl implements TicketService {
     public List<TicketDTO> findAll() {
         log.debug("Request to get all Tickets");
         return ticketRepository.findAll().stream().map(ticketMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    /**
+     *  Get all the tickets where Passenger is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<TicketDTO> findAllWherePassengerIsNull() {
+        log.debug("Request to get all tickets where Passenger is null");
+        return StreamSupport
+            .stream(ticketRepository.findAll().spliterator(), false)
+            .filter(ticket -> ticket.getPassenger() == null)
+            .map(ticketMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override

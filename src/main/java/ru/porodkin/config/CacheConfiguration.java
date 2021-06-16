@@ -61,6 +61,10 @@ public class CacheConfiguration {
             createCache(cm, ru.porodkin.domain.Station.class.getName());
             createCache(cm, ru.porodkin.domain.Ticket.class.getName());
             createCache(cm, ru.porodkin.domain.TypeObject.class.getName());
+            createCache(cm, ru.porodkin.domain.Counterpart.class.getName() + ".buses");
+            createCache(cm, ru.porodkin.domain.Country.class.getName() + ".regions");
+            createCache(cm, ru.porodkin.domain.Country.class.getName() + ".countryOfLocations");
+            createCache(cm, ru.porodkin.domain.Driver.class.getName() + ".buses");
             // jhipster-needle-ehcache-add-entry
         };
     }

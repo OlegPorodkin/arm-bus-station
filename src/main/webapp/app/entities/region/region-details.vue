@@ -22,6 +22,24 @@
           <dd>
             <span>{{ region.description }}</span>
           </dd>
+          <dt>
+            <span>Country</span>
+          </dt>
+          <dd>
+            <div v-if="region.country">
+              <router-link :to="{ name: 'CountryView', params: { countryId: region.country.id } }">{{ region.country.id }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span>Country Of Location</span>
+          </dt>
+          <dd>
+            <div v-if="region.countryOfLocation">
+              <router-link :to="{ name: 'CountryView', params: { countryId: region.countryOfLocation.id } }">{{
+                region.countryOfLocation.id
+              }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

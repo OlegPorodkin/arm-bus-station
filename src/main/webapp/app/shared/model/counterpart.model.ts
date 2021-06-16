@@ -1,3 +1,5 @@
+import { IBus } from '@/shared/model/bus.model';
+
 export interface ICounterpart {
   id?: number;
   uuid?: string | null;
@@ -10,6 +12,7 @@ export interface ICounterpart {
   address?: string | null;
   description?: string | null;
   country?: string | null;
+  buses?: IBus[] | null;
 }
 
 export class Counterpart implements ICounterpart {
@@ -24,6 +27,7 @@ export class Counterpart implements ICounterpart {
     public taxSystem?: string | null,
     public address?: string | null,
     public description?: string | null,
-    public country?: string | null
+    public country?: string | null,
+    public buses?: IBus[] | null
   ) {}
 }

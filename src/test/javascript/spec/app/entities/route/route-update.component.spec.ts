@@ -11,6 +11,8 @@ import RouteUpdateComponent from '@/entities/route/route-update.vue';
 import RouteClass from '@/entities/route/route-update.component';
 import RouteService from '@/entities/route/route.service';
 
+import BusService from '@/entities/bus/bus.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -38,6 +40,8 @@ describe('Component Tests', () => {
         router,
         provide: {
           routeService: () => routeServiceStub,
+
+          busService: () => new BusService(),
         },
       });
       comp = wrapper.vm;

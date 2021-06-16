@@ -1,3 +1,6 @@
+import { IRoute } from '@/shared/model/route.model';
+import { ITicket } from '@/shared/model/ticket.model';
+
 export interface IPassenger {
   id?: number;
   uuid?: string | null;
@@ -9,6 +12,8 @@ export interface IPassenger {
   sex?: string | null;
   phone?: string | null;
   citizenship?: string | null;
+  route?: IRoute | null;
+  ticket?: ITicket | null;
 }
 
 export class Passenger implements IPassenger {
@@ -22,6 +27,8 @@ export class Passenger implements IPassenger {
     public boardingStatus?: string | null,
     public sex?: string | null,
     public phone?: string | null,
-    public citizenship?: string | null
+    public citizenship?: string | null,
+    public route?: IRoute | null,
+    public ticket?: ITicket | null
   ) {}
 }

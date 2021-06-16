@@ -16,6 +16,10 @@ public class RegionDTO implements Serializable {
 
     private String description;
 
+    private CountryDTO country;
+
+    private CountryDTO countryOfLocation;
+
     public Long getId() {
         return id;
     }
@@ -48,6 +52,22 @@ public class RegionDTO implements Serializable {
         this.description = description;
     }
 
+    public CountryDTO getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryDTO country) {
+        this.country = country;
+    }
+
+    public CountryDTO getCountryOfLocation() {
+        return countryOfLocation;
+    }
+
+    public void setCountryOfLocation(CountryDTO countryOfLocation) {
+        this.countryOfLocation = countryOfLocation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,6 +97,8 @@ public class RegionDTO implements Serializable {
             ", uuid='" + getUuid() + "'" +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", country=" + getCountry() +
+            ", countryOfLocation=" + getCountryOfLocation() +
             "}";
     }
 }

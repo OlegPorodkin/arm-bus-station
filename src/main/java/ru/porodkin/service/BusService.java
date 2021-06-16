@@ -30,6 +30,12 @@ public interface BusService {
      * @return the list of entities.
      */
     List<BusDTO> findAll();
+    /**
+     * Get all the BusDTO where Route is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<BusDTO> findAllWhereRouteIsNull();
 
     /**
      * Get the "id" bus.

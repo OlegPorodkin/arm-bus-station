@@ -58,6 +58,14 @@
           <dd>
             <span>{{ route.description }}</span>
           </dd>
+          <dt>
+            <span>Bus</span>
+          </dt>
+          <dd>
+            <div v-if="route.bus">
+              <router-link :to="{ name: 'BusView', params: { busId: route.bus.id } }">{{ route.bus.id }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

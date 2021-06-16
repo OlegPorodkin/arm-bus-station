@@ -17,7 +17,14 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "buses",
+      "otherEntityName": "bus",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "driver"
+    }
+  ],
   "service": "serviceImpl",
   "dto": "mapstruct",
   "jpaMetamodelFiltering": false,

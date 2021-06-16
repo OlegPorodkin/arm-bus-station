@@ -41,7 +41,14 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "bus",
+      "otherEntityName": "bus",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "counterpart"
+    }
+  ],
   "service": "serviceImpl",
   "dto": "mapstruct",
   "jpaMetamodelFiltering": false,

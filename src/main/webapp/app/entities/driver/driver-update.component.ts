@@ -1,5 +1,8 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import BusService from '@/entities/bus/bus.service';
+import { IBus } from '@/shared/model/bus.model';
+
 import { IDriver, Driver } from '@/shared/model/driver.model';
 import DriverService from './driver.service';
 
@@ -18,6 +21,10 @@ const validations: any = {
 export default class DriverUpdate extends Vue {
   @Inject('driverService') private driverService: () => DriverService;
   public driver: IDriver = new Driver();
+
+  @Inject('busService') private busService: () => BusService;
+
+  public buses: IBus[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -26,6 +33,7 @@ export default class DriverUpdate extends Vue {
       if (to.params.driverId) {
         vm.retrieveDriver(to.params.driverId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -86,5 +94,11 @@ export default class DriverUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.busService()
+      .retrieve()
+      .then(res => {
+        this.buses = res.data;
+      });
+  }
 }

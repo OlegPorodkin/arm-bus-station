@@ -27,6 +27,10 @@
     <include file="config/liquibase/changelog/20210616125547_added_entity_Ticket.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210616125714_added_entity_TypeObject.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210615213229_added_entity_constraints_Bus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616124605_added_entity_constraints_Route.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616124224_added_entity_constraints_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616123727_added_entity_constraints_Passenger.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

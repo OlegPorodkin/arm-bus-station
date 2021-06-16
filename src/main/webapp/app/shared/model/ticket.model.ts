@@ -1,3 +1,5 @@
+import { IPassenger } from '@/shared/model/passenger.model';
+
 export interface ITicket {
   id?: number;
   uuid?: string | null;
@@ -7,6 +9,7 @@ export interface ITicket {
   type?: string | null;
   dateDeparture?: Date | null;
   price?: number | null;
+  passenger?: IPassenger | null;
 }
 
 export class Ticket implements ITicket {
@@ -18,6 +21,7 @@ export class Ticket implements ITicket {
     public number?: number | null,
     public type?: string | null,
     public dateDeparture?: Date | null,
-    public price?: number | null
+    public price?: number | null,
+    public passenger?: IPassenger | null
   ) {}
 }

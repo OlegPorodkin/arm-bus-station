@@ -1,5 +1,6 @@
 package ru.porodkin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
@@ -28,6 +29,14 @@ public class Region implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "regions", "countryOfLocations" }, allowSetters = true)
+    private Country country;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "regions", "countryOfLocations" }, allowSetters = true)
+    private Country countryOfLocation;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -80,6 +89,32 @@ public class Region implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Country getCountry() {
+        return this.country;
+    }
+
+    public Region country(Country country) {
+        this.setCountry(country);
+        return this;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Country getCountryOfLocation() {
+        return this.countryOfLocation;
+    }
+
+    public Region countryOfLocation(Country country) {
+        this.setCountryOfLocation(country);
+        return this;
+    }
+
+    public void setCountryOfLocation(Country country) {
+        this.countryOfLocation = country;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -1,5 +1,8 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import CountryService from '@/entities/country/country.service';
+import { ICountry } from '@/shared/model/country.model';
+
 import { IRegion, Region } from '@/shared/model/region.model';
 import RegionService from './region.service';
 
@@ -17,6 +20,10 @@ const validations: any = {
 export default class RegionUpdate extends Vue {
   @Inject('regionService') private regionService: () => RegionService;
   public region: IRegion = new Region();
+
+  @Inject('countryService') private countryService: () => CountryService;
+
+  public countries: ICountry[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -25,6 +32,7 @@ export default class RegionUpdate extends Vue {
       if (to.params.regionId) {
         vm.retrieveRegion(to.params.regionId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -85,5 +93,11 @@ export default class RegionUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.countryService()
+      .retrieve()
+      .then(res => {
+        this.countries = res.data;
+      });
+  }
 }

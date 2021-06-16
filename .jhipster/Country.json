@@ -9,7 +9,20 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "regions",
+      "otherEntityName": "region",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "country"
+    },
+    {
+      "relationshipName": "countryOfLocations",
+      "otherEntityName": "region",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "countryOfLocation"
+    }
+  ],
   "service": "serviceImpl",
   "dto": "mapstruct",
   "jpaMetamodelFiltering": false,
