@@ -51,6 +51,16 @@ public class CacheConfiguration {
             createCache(cm, ru.porodkin.domain.PersistentToken.class.getName());
             createCache(cm, ru.porodkin.domain.User.class.getName() + ".persistentTokens");
             createCache(cm, ru.porodkin.domain.Bus.class.getName());
+            createCache(cm, ru.porodkin.domain.Counterpart.class.getName());
+            createCache(cm, ru.porodkin.domain.Country.class.getName());
+            createCache(cm, ru.porodkin.domain.Driver.class.getName());
+            createCache(cm, ru.porodkin.domain.Passenger.class.getName());
+            createCache(cm, ru.porodkin.domain.Passport.class.getName());
+            createCache(cm, ru.porodkin.domain.Region.class.getName());
+            createCache(cm, ru.porodkin.domain.Route.class.getName());
+            createCache(cm, ru.porodkin.domain.Station.class.getName());
+            createCache(cm, ru.porodkin.domain.Ticket.class.getName());
+            createCache(cm, ru.porodkin.domain.TypeObject.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

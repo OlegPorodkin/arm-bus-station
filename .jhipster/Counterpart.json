@@ -1,0 +1,52 @@
+{
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shortName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ogrn",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "egis_otb_rf",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "taxSystem",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "country",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Counterpart",
+  "changelogDate": "20210616122942"
+}

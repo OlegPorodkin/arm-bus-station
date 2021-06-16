@@ -1,0 +1,32 @@
+{
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "serial",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateOfIssue",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "whoIssued",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Passport",
+  "changelogDate": "20210616124047"
+}

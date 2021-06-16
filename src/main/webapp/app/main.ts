@@ -27,6 +27,16 @@ import UserOAuth2Service from '@/entities/user/user.oauth2.service';
 /* tslint:disable */
 
 import BusService from '@/entities/bus/bus.service';
+import CounterpartService from '@/entities/counterpart/counterpart.service';
+import CountryService from '@/entities/country/country.service';
+import DriverService from '@/entities/driver/driver.service';
+import PassengerService from '@/entities/passenger/passenger.service';
+import PassportService from '@/entities/passport/passport.service';
+import RegionService from '@/entities/region/region.service';
+import RouteService from '@/entities/route/route.service';
+import StationService from '@/entities/station/station.service';
+import TicketService from '@/entities/ticket/ticket.service';
+import TypeObjectService from '@/entities/type-object/type-object.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -83,6 +93,16 @@ new Vue({
 
     userOAuth2Service: () => new UserOAuth2Service(),
     busService: () => new BusService(),
+    counterpartService: () => new CounterpartService(),
+    countryService: () => new CountryService(),
+    driverService: () => new DriverService(),
+    passengerService: () => new PassengerService(),
+    passportService: () => new PassportService(),
+    regionService: () => new RegionService(),
+    routeService: () => new RouteService(),
+    stationService: () => new StationService(),
+    ticketService: () => new TicketService(),
+    typeObjectService: () => new TypeObjectService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },

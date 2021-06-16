@@ -42,7 +42,7 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["en", "fr"],
-    "lastLiquibaseTimestamp": 1623792749000,
-    "entities": ["Bus"]
+    "lastLiquibaseTimestamp": 1623848234000,
+    "entities": ["Bus", "Counterpart", "Country", "Driver", "Passenger", "Passport", "Region", "Route", "Station", "Ticket", "TypeObject"]
   }
 }

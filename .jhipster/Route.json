@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plannedArrival",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "plannedDeparture",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "actualArrival",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "actualDeparture",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "timeRegistration",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "platform",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "routStatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Route",
+  "changelogDate": "20210616124605"
+}

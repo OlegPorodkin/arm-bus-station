@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "patronymic",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthday",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "boardingStatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sex",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "citizenship",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Passenger",
+  "changelogDate": "20210616123727"
+}

@@ -33,6 +33,298 @@
             <font-awesome-icon icon="asterisk" />
             <span>Bus</span>
           </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/region">
+            <font-awesome-icon icon="asterisk" />
+            <span>Region</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/route">
+            <font-awesome-icon icon="asterisk" />
+            <span>Route</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/region">
+            <font-awesome-icon icon="asterisk" />
+            <span>Region</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/route">
+            <font-awesome-icon icon="asterisk" />
+            <span>Route</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/region">
+            <font-awesome-icon icon="asterisk" />
+            <span>Region</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/station">
+            <font-awesome-icon icon="asterisk" />
+            <span>Station</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/region">
+            <font-awesome-icon icon="asterisk" />
+            <span>Region</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/route">
+            <font-awesome-icon icon="asterisk" />
+            <span>Route</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/ticket">
+            <font-awesome-icon icon="asterisk" />
+            <span>Ticket</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/region">
+            <font-awesome-icon icon="asterisk" />
+            <span>Region</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/route">
+            <font-awesome-icon icon="asterisk" />
+            <span>Route</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/station">
+            <font-awesome-icon icon="asterisk" />
+            <span>Station</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/type-object">
+            <font-awesome-icon icon="asterisk" />
+            <span>Type Object</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/bus">
+            <font-awesome-icon icon="asterisk" />
+            <span>Bus</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/counterpart">
+            <font-awesome-icon icon="asterisk" />
+            <span>Counterpart</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/country">
+            <font-awesome-icon icon="asterisk" />
+            <span>Country</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/driver">
+            <font-awesome-icon icon="asterisk" />
+            <span>Driver</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passenger">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passenger</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/passport">
+            <font-awesome-icon icon="asterisk" />
+            <span>Passport</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/region">
+            <font-awesome-icon icon="asterisk" />
+            <span>Region</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/route">
+            <font-awesome-icon icon="asterisk" />
+            <span>Route</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/station">
+            <font-awesome-icon icon="asterisk" />
+            <span>Station</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/ticket">
+            <font-awesome-icon icon="asterisk" />
+            <span>Ticket</span>
+          </b-dropdown-item>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </b-nav-item-dropdown>
         <b-nav-item-dropdown

@@ -1,0 +1,44 @@
+{
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "okato",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "street",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "distance",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Station",
+  "changelogDate": "20210616125244"
+}

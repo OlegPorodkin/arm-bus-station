@@ -1,0 +1,172 @@
+package ru.porodkin.web.rest;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.porodkin.repository.PassengerRepository;
+import ru.porodkin.service.PassengerService;
+import ru.porodkin.service.dto.PassengerDTO;
+import ru.porodkin.web.rest.errors.BadRequestAlertException;
+import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.ResponseUtil;
+
+/**
+ * REST controller for managing {@link ru.porodkin.domain.Passenger}.
+ */
+@RestController
+@RequestMapping("/api")
+public class PassengerResource {
+
+    private final Logger log = LoggerFactory.getLogger(PassengerResource.class);
+
+    private static final String ENTITY_NAME = "passenger";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
+    private final PassengerService passengerService;
+
+    private final PassengerRepository passengerRepository;
+
+    public PassengerResource(PassengerService passengerService, PassengerRepository passengerRepository) {
+        this.passengerService = passengerService;
+        this.passengerRepository = passengerRepository;
+    }
+
+    /**
+     * {@code POST  /passengers} : Create a new passenger.
+     *
+     * @param passengerDTO the passengerDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new passengerDTO, or with status {@code 400 (Bad Request)} if the passenger has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/passengers")
+    public ResponseEntity<PassengerDTO> createPassenger(@RequestBody PassengerDTO passengerDTO) throws URISyntaxException {
+        log.debug("REST request to save Passenger : {}", passengerDTO);
+        if (passengerDTO.getId() != null) {
+            throw new BadRequestAlertException("A new passenger cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        PassengerDTO result = passengerService.save(passengerDTO);
+        return ResponseEntity
+            .created(new URI("/api/passengers/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code PUT  /passengers/:id} : Updates an existing passenger.
+     *
+     * @param id the id of the passengerDTO to save.
+     * @param passengerDTO the passengerDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated passengerDTO,
+     * or with status {@code 400 (Bad Request)} if the passengerDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the passengerDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/passengers/{id}")
+    public ResponseEntity<PassengerDTO> updatePassenger(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody PassengerDTO passengerDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to update Passenger : {}, {}", id, passengerDTO);
+        if (passengerDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, passengerDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!passengerRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        PassengerDTO result = passengerService.save(passengerDTO);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, passengerDTO.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code PATCH  /passengers/:id} : Partial updates given fields of an existing passenger, field will ignore if it is null
+     *
+     * @param id the id of the passengerDTO to save.
+     * @param passengerDTO the passengerDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated passengerDTO,
+     * or with status {@code 400 (Bad Request)} if the passengerDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the passengerDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the passengerDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PatchMapping(value = "/passengers/{id}", consumes = "application/merge-patch+json")
+    public ResponseEntity<PassengerDTO> partialUpdatePassenger(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody PassengerDTO passengerDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update Passenger partially : {}, {}", id, passengerDTO);
+        if (passengerDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, passengerDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!passengerRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<PassengerDTO> result = passengerService.partialUpdate(passengerDTO);
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, passengerDTO.getId().toString())
+        );
+    }
+
+    /**
+     * {@code GET  /passengers} : get all the passengers.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of passengers in body.
+     */
+    @GetMapping("/passengers")
+    public List<PassengerDTO> getAllPassengers() {
+        log.debug("REST request to get all Passengers");
+        return passengerService.findAll();
+    }
+
+    /**
+     * {@code GET  /passengers/:id} : get the "id" passenger.
+     *
+     * @param id the id of the passengerDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the passengerDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/passengers/{id}")
+    public ResponseEntity<PassengerDTO> getPassenger(@PathVariable Long id) {
+        log.debug("REST request to get Passenger : {}", id);
+        Optional<PassengerDTO> passengerDTO = passengerService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(passengerDTO);
+    }
+
+    /**
+     * {@code DELETE  /passengers/:id} : delete the "id" passenger.
+     *
+     * @param id the id of the passengerDTO to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/passengers/{id}")
+    public ResponseEntity<Void> deletePassenger(@PathVariable Long id) {
+        log.debug("REST request to delete Passenger : {}", id);
+        passengerService.delete(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .build();
+    }
+}

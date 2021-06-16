@@ -16,6 +16,16 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210615213229_added_entity_Bus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616122942_added_entity_Counterpart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616123203_added_entity_Country.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616123411_added_entity_Driver.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616123727_added_entity_Passenger.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616124047_added_entity_Passport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616124224_added_entity_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616124605_added_entity_Route.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616125244_added_entity_Station.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616125547_added_entity_Ticket.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210616125714_added_entity_TypeObject.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
