@@ -46,6 +46,18 @@
       "ownerSide": true,
       "id": true,
       "otherEntityRelationshipName": "route"
+    },
+    {
+      "relationshipName": "station",
+      "otherEntityName": "station",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipName": "passengers",
+      "otherEntityName": "passenger",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "route"
     }
   ],
   "service": "serviceImpl",

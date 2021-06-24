@@ -144,6 +144,19 @@
               </option>
             </select>
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="route-station">Station</label>
+            <select class="form-control" id="route-station" data-cy="station" name="station" v-model="route.station">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="route.station && stationOption.id === route.station.id ? route.station : stationOption"
+                v-for="stationOption in stations"
+                :key="stationOption.id"
+              >
+                {{ stationOption.name }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

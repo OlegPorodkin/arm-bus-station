@@ -3,6 +3,9 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 import RouteService from '@/entities/route/route.service';
 import { IRoute } from '@/shared/model/route.model';
 
+import PassportService from '@/entities/passport/passport.service';
+import { IPassport } from '@/shared/model/passport.model';
+
 import TicketService from '@/entities/ticket/ticket.service';
 import { ITicket } from '@/shared/model/ticket.model';
 
@@ -33,6 +36,10 @@ export default class PassengerUpdate extends Vue {
   @Inject('routeService') private routeService: () => RouteService;
 
   public routes: IRoute[] = [];
+
+  @Inject('passportService') private passportService: () => PassportService;
+
+  public passports: IPassport[] = [];
 
   @Inject('ticketService') private ticketService: () => TicketService;
 
@@ -111,6 +118,11 @@ export default class PassengerUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.routes = res.data;
+      });
+    this.passportService()
+      .retrieve()
+      .then(res => {
+        this.passports = res.data;
       });
     this.ticketService()
       .retrieve()

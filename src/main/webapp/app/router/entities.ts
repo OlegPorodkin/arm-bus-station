@@ -68,6 +68,11 @@ const TypeObject = () => import('@/entities/type-object/type-object.vue');
 const TypeObjectUpdate = () => import('@/entities/type-object/type-object-update.vue');
 // prettier-ignore
 const TypeObjectDetails = () => import('@/entities/type-object/type-object-details.vue');
+// prettier-ignore
+const DispatcherDetails = () => import('@/dispatcher/dispatcher-details.vue');
+// prettier-ignore
+const DispatcherSendingDetails = () => import('@/dispatcher/dispatcher-sending-details.vue');
+
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default [
@@ -335,5 +340,20 @@ export default [
     component: TypeObjectDetails,
     meta: { authorities: [Authority.USER] },
   },
+  {
+    path: '/dispatcher-details/:routeId/view',
+    name: 'DispatcherDetails',
+    component: DispatcherDetails,
+    meta: { authorities: [Authority.USER] },
+    props: true,
+  },
+  {
+    path: '/sending-details/:routeId/view',
+    name: 'DispatcherSendingDetails',
+    component: DispatcherSendingDetails,
+    meta: { authorities: [Authority.USER] },
+    props: true,
+  },
+
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
 ];

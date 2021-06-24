@@ -108,6 +108,32 @@
               v-model.number="$v.ticket.price.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="ticket-departure">Departure</label>
+            <select class="form-control" id="ticket-departure" data-cy="departure" name="departure" v-model="ticket.departure">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="ticket.departure && stationOption.id === ticket.departure.id ? ticket.departure : stationOption"
+                v-for="stationOption in departures"
+                :key="stationOption.id"
+              >
+                {{ stationOption.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="ticket-destination">Destination</label>
+            <select class="form-control" id="ticket-destination" data-cy="destination" name="destination" v-model="ticket.destination">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="ticket.destination && stationOption.id === ticket.destination.id ? ticket.destination : stationOption"
+                v-for="stationOption in destinations"
+                :key="stationOption.id"
+              >
+                {{ stationOption.name }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

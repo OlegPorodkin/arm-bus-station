@@ -38,6 +38,7 @@
             <th scope="row"><span>Rout Status</span></th>
             <th scope="row"><span>Description</span></th>
             <th scope="row"><span>Bus</span></th>
+            <th scope="row"><span>Station</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -58,6 +59,11 @@
             <td>
               <div v-if="route.bus">
                 <router-link :to="{ name: 'BusView', params: { busId: route.bus.id } }">{{ route.bus.id }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="route.station">
+                <router-link :to="{ name: 'StationView', params: { stationId: route.station.id } }">{{ route.station.name }}</router-link>
               </div>
             </td>
             <td class="text-right">

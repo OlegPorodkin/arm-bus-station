@@ -1,5 +1,8 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import PassengerService from '@/entities/passenger/passenger.service';
+import { IPassenger } from '@/shared/model/passenger.model';
+
 import { IPassport, Passport } from '@/shared/model/passport.model';
 import PassportService from './passport.service';
 
@@ -19,6 +22,10 @@ const validations: any = {
 export default class PassportUpdate extends Vue {
   @Inject('passportService') private passportService: () => PassportService;
   public passport: IPassport = new Passport();
+
+  @Inject('passengerService') private passengerService: () => PassengerService;
+
+  public passengers: IPassenger[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -27,6 +34,7 @@ export default class PassportUpdate extends Vue {
       if (to.params.passportId) {
         vm.retrievePassport(to.params.passportId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -87,5 +95,11 @@ export default class PassportUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.passengerService()
+      .retrieve()
+      .then(res => {
+        this.passengers = res.data;
+      });
+  }
 }

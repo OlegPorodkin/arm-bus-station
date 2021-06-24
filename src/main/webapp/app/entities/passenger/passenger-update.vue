@@ -146,6 +146,19 @@
             </select>
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="passenger-passport">Passport</label>
+            <select class="form-control" id="passenger-passport" data-cy="passport" name="passport" v-model="passenger.passport">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="passenger.passport && passportOption.id === passenger.passport.id ? passenger.passport : passportOption"
+                v-for="passportOption in passports"
+                :key="passportOption.id"
+              >
+                {{ passportOption.id_passport }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="passenger-ticket">Ticket</label>
             <select class="form-control" id="passenger-ticket" data-cy="ticket" name="ticket" v-model="passenger.ticket">
               <option v-bind:value="null"></option>
@@ -154,7 +167,7 @@
                 v-for="ticketOption in tickets"
                 :key="ticketOption.id"
               >
-                {{ ticketOption.id }}
+                {{ ticketOption.id_ticket }}
               </option>
             </select>
           </div>

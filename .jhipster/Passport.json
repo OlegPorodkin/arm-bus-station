@@ -21,7 +21,15 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "passenger",
+      "otherEntityName": "passenger",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "passport"
+    }
+  ],
   "service": "serviceImpl",
   "dto": "mapstruct",
   "jpaMetamodelFiltering": false,

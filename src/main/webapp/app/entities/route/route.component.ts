@@ -14,6 +14,7 @@ export default class Route extends Vue {
   private removeId: number = null;
 
   public routes: IRoute[] = [];
+  private selected: [];
 
   public isFetching = false;
 
@@ -72,5 +73,9 @@ export default class Route extends Vue {
 
   public closeDialog(): void {
     (<any>this.$refs.removeEntity).hide();
+  }
+
+  public rowSelected(items) {
+    console.log(items);
   }
 }

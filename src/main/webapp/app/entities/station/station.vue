@@ -36,6 +36,9 @@
             <th scope="row"><span>Longitude</span></th>
             <th scope="row"><span>Latitude</span></th>
             <th scope="row"><span>Distance</span></th>
+            <th scope="row"><span>Next Station</span></th>
+            <th scope="row"><span>Type Object</span></th>
+            <th scope="row"><span>Region</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -52,6 +55,25 @@
             <td>{{ station.longitude }}</td>
             <td>{{ station.latitude }}</td>
             <td>{{ station.distance }}</td>
+            <td>
+              <div v-if="station.nextStation">
+                <router-link :to="{ name: 'StationView', params: { stationId: station.nextStation.id } }">{{
+                  station.nextStation.name
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="station.typeObject">
+                <router-link :to="{ name: 'TypeObjectView', params: { typeObjectId: station.typeObject.id } }">{{
+                  station.typeObject.name
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="station.region">
+                <router-link :to="{ name: 'RegionView', params: { regionId: station.region.id } }">{{ station.region.name }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'StationView', params: { stationId: station.id } }" custom v-slot="{ navigate }">

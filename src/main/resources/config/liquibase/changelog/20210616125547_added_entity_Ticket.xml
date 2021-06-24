@@ -35,6 +35,12 @@
             <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="departure_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_ticket__departure_id" />
+            </column>
+            <column name="destination_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_ticket__destination_id" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

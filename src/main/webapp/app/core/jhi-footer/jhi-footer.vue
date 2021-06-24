@@ -1,6 +1,6 @@
 <template>
   <div id="footer" class="footer">
-    <p>This is your footer</p>
+    <p>&copy; 2021 Породкин Inc</p>
   </div>
 </template>
 

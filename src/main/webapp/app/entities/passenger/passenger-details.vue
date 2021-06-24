@@ -67,11 +67,23 @@
             </div>
           </dd>
           <dt>
+            <span>Passport</span>
+          </dt>
+          <dd>
+            <div v-if="passenger.passport">
+              <router-link :to="{ name: 'PassportView', params: { passportId: passenger.passport.id } }">{{
+                passenger.passport.id_passport
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
             <span>Ticket</span>
           </dt>
           <dd>
             <div v-if="passenger.ticket">
-              <router-link :to="{ name: 'TicketView', params: { ticketId: passenger.ticket.id } }">{{ passenger.ticket.id }}</router-link>
+              <router-link :to="{ name: 'TicketView', params: { ticketId: passenger.ticket.id } }">{{
+                passenger.ticket.id_ticket
+              }}</router-link>
             </div>
           </dd>
         </dl>

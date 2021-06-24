@@ -31,6 +31,8 @@ public class PassengerDTO implements Serializable {
 
     private RouteDTO route;
 
+    private PassportDTO passport;
+
     private TicketDTO ticket;
 
     public Long getId() {
@@ -121,6 +123,14 @@ public class PassengerDTO implements Serializable {
         this.route = route;
     }
 
+    public PassportDTO getPassport() {
+        return passport;
+    }
+
+    public void setPassport(PassportDTO passport) {
+        this.passport = passport;
+    }
+
     public TicketDTO getTicket() {
         return ticket;
     }
@@ -165,6 +175,7 @@ public class PassengerDTO implements Serializable {
             ", phone='" + getPhone() + "'" +
             ", citizenship='" + getCitizenship() + "'" +
             ", route=" + getRoute() +
+            ", passport=" + getPassport() +
             ", ticket=" + getTicket() +
             "}";
     }

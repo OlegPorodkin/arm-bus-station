@@ -52,6 +52,34 @@
           <dd>
             <span>{{ station.distance }}</span>
           </dd>
+          <dt>
+            <span>Next Station</span>
+          </dt>
+          <dd>
+            <div v-if="station.nextStation">
+              <router-link :to="{ name: 'StationView', params: { stationId: station.nextStation.id } }">{{
+                station.nextStation.name
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span>Type Object</span>
+          </dt>
+          <dd>
+            <div v-if="station.typeObject">
+              <router-link :to="{ name: 'TypeObjectView', params: { typeObjectId: station.typeObject.id } }">{{
+                station.typeObject.name
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span>Region</span>
+          </dt>
+          <dd>
+            <div v-if="station.region">
+              <router-link :to="{ name: 'RegionView', params: { regionId: station.region.id } }">{{ station.region.name }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

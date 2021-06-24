@@ -43,9 +43,19 @@ public class Ticket implements Serializable {
     @Column(name = "price")
     private Double price;
 
-    @JsonIgnoreProperties(value = { "route", "ticket" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "route", "passport", "ticket" }, allowSetters = true)
     @OneToOne(mappedBy = "ticket")
     private Passenger passenger;
+
+    @JsonIgnoreProperties(value = { "nextStation", "typeObject", "region" }, allowSetters = true)
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Station departure;
+
+    @JsonIgnoreProperties(value = { "nextStation", "typeObject", "region" }, allowSetters = true)
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Station destination;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -169,6 +179,32 @@ public class Ticket implements Serializable {
             passenger.setTicket(this);
         }
         this.passenger = passenger;
+    }
+
+    public Station getDeparture() {
+        return this.departure;
+    }
+
+    public Ticket departure(Station station) {
+        this.setDeparture(station);
+        return this;
+    }
+
+    public void setDeparture(Station station) {
+        this.departure = station;
+    }
+
+    public Station getDestination() {
+        return this.destination;
+    }
+
+    public Ticket destination(Station station) {
+        this.setDestination(station);
+        return this;
+    }
+
+    public void setDestination(Station station) {
+        this.destination = station;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

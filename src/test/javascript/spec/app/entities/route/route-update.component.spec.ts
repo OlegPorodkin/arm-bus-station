@@ -13,6 +13,10 @@ import RouteService from '@/entities/route/route.service';
 
 import BusService from '@/entities/bus/bus.service';
 
+import StationService from '@/entities/station/station.service';
+
+import PassengerService from '@/entities/passenger/passenger.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -42,6 +46,10 @@ describe('Component Tests', () => {
           routeService: () => routeServiceStub,
 
           busService: () => new BusService(),
+
+          stationService: () => new StationService(),
+
+          passengerService: () => new PassengerService(),
         },
       });
       comp = wrapper.vm;

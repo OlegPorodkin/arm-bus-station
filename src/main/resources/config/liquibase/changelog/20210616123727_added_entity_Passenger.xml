@@ -44,6 +44,12 @@
             <column name="route_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="passport_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_passenger__passport_id" />
+            </column>
+            <column name="ticket_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_passenger__ticket_id" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

@@ -6,6 +6,12 @@ import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
 import BusService from '@/entities/bus/bus.service';
 import { IBus } from '@/shared/model/bus.model';
 
+import StationService from '@/entities/station/station.service';
+import { IStation } from '@/shared/model/station.model';
+
+import PassengerService from '@/entities/passenger/passenger.service';
+import { IPassenger } from '@/shared/model/passenger.model';
+
 import { IRoute, Route } from '@/shared/model/route.model';
 import RouteService from './route.service';
 
@@ -33,6 +39,14 @@ export default class RouteUpdate extends Vue {
   @Inject('busService') private busService: () => BusService;
 
   public buses: IBus[] = [];
+
+  @Inject('stationService') private stationService: () => StationService;
+
+  public stations: IStation[] = [];
+
+  @Inject('passengerService') private passengerService: () => PassengerService;
+
+  public passengers: IPassenger[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -135,6 +149,16 @@ export default class RouteUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.buses = res.data;
+      });
+    this.stationService()
+      .retrieve()
+      .then(res => {
+        this.stations = res.data;
+      });
+    this.passengerService()
+      .retrieve()
+      .then(res => {
+        this.passengers = res.data;
       });
   }
 }

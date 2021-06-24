@@ -13,5 +13,11 @@
                                  constraintName="fk_route__bus_id"
                                  referencedColumnNames="id"
                                  referencedTableName="bus"/>
+
+        <addForeignKeyConstraint baseColumnNames="station_id"
+                                 baseTableName="route"
+                                 constraintName="fk_route__station_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="station"/>
     </changeSet>
 </databaseChangeLog>

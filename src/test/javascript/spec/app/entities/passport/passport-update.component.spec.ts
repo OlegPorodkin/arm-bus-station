@@ -8,6 +8,8 @@ import PassportUpdateComponent from '@/entities/passport/passport-update.vue';
 import PassportClass from '@/entities/passport/passport-update.component';
 import PassportService from '@/entities/passport/passport.service';
 
+import PassengerService from '@/entities/passenger/passenger.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +37,8 @@ describe('Component Tests', () => {
         router,
         provide: {
           passportService: () => passportServiceStub,
+
+          passengerService: () => new PassengerService(),
         },
       });
       comp = wrapper.vm;

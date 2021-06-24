@@ -30,6 +30,12 @@ public interface PassportService {
      * @return the list of entities.
      */
     List<PassportDTO> findAll();
+    /**
+     * Get all the PassportDTO where Passenger is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<PassportDTO> findAllWherePassengerIsNull();
 
     /**
      * Get the "id" passport.

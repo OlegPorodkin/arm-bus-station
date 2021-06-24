@@ -3,6 +3,9 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 import PassengerService from '@/entities/passenger/passenger.service';
 import { IPassenger } from '@/shared/model/passenger.model';
 
+import StationService from '@/entities/station/station.service';
+import { IStation } from '@/shared/model/station.model';
+
 import { ITicket, Ticket } from '@/shared/model/ticket.model';
 import TicketService from './ticket.service';
 
@@ -28,6 +31,10 @@ export default class TicketUpdate extends Vue {
   @Inject('passengerService') private passengerService: () => PassengerService;
 
   public passengers: IPassenger[] = [];
+
+  @Inject('stationService') private stationService: () => StationService;
+
+  public stations: IStation[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -102,6 +109,11 @@ export default class TicketUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.passengers = res.data;
+      });
+    this.stationService()
+      .retrieve()
+      .then(res => {
+        this.stations = res.data;
       });
   }
 }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,20 @@ public class PassportServiceImpl implements PassportService {
     public List<PassportDTO> findAll() {
         log.debug("Request to get all Passports");
         return passportRepository.findAll().stream().map(passportMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    /**
+     *  Get all the passports where Passenger is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<PassportDTO> findAllWherePassengerIsNull() {
+        log.debug("Request to get all passports where Passenger is null");
+        return StreamSupport
+            .stream(passportRepository.findAll().spliterator(), false)
+            .filter(passport -> passport.getPassenger() == null)
+            .map(passportMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override

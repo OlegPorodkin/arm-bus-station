@@ -153,7 +153,7 @@ public class RouteResource {
     @GetMapping("/routes/{id}")
     public ResponseEntity<RouteDTO> getRoute(@PathVariable Long id) {
         log.debug("REST request to get Route : {}", id);
-        Optional<RouteDTO> routeDTO = routeService.findOne(id);
+        Optional<RouteDTO> routeDTO = routeService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(routeDTO);
     }
 

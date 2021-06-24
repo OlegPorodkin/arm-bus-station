@@ -8,7 +8,9 @@ export default class JhiNavbar extends Vue {
   @Inject('loginService')
   private loginService: () => LoginService;
 
-  @Inject('accountService') private accountService: () => AccountService;
+  @Inject('accountService')
+  private accountService: () => AccountService;
+
   public version = VERSION ? 'v' + VERSION : '';
   private currentLanguage = this.$store.getters.currentLanguage;
   private languages: any = this.$store.getters.languages;
@@ -55,5 +57,9 @@ export default class JhiNavbar extends Vue {
 
   public get inProduction(): boolean {
     return this.$store.getters.activeProfiles.indexOf('prod') > -1;
+  }
+
+  public get username(): string {
+    return this.$store.getters.account ? this.$store.getters.account.login : '';
   }
 }

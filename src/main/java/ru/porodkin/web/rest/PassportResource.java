@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -133,10 +134,15 @@ public class PassportResource {
     /**
      * {@code GET  /passports} : get all the passports.
      *
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of passports in body.
      */
     @GetMapping("/passports")
-    public List<PassportDTO> getAllPassports() {
+    public List<PassportDTO> getAllPassports(@RequestParam(required = false) String filter) {
+        if ("passenger-is-null".equals(filter)) {
+            log.debug("REST request to get all Passports where passenger is null");
+            return passportService.findAllWherePassengerIsNull();
+        }
         log.debug("REST request to get all Passports");
         return passportService.findAll();
     }

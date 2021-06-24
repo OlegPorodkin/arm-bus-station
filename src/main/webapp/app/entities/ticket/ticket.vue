@@ -35,6 +35,8 @@
             <th scope="row"><span>Type</span></th>
             <th scope="row"><span>Date Departure</span></th>
             <th scope="row"><span>Price</span></th>
+            <th scope="row"><span>Departure</span></th>
+            <th scope="row"><span>Destination</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -50,6 +52,20 @@
             <td>{{ ticket.type }}</td>
             <td>{{ ticket.dateDeparture }}</td>
             <td>{{ ticket.price }}</td>
+            <td>
+              <div v-if="ticket.departure">
+                <router-link :to="{ name: 'StationView', params: { stationId: ticket.departure.id } }">{{
+                  ticket.departure.name
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="ticket.destination">
+                <router-link :to="{ name: 'StationView', params: { stationId: ticket.destination.id } }">{{
+                  ticket.destination.name
+                }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'TicketView', params: { ticketId: ticket.id } }" custom v-slot="{ navigate }">

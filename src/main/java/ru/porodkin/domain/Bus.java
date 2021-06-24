@@ -12,6 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "bus")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedEntityGraph(name = "bus.all", includeAllAttributes = true)
 public class Bus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,15 +34,15 @@ public class Bus implements Serializable {
     @Column(name = "passenger_places")
     private Integer passengerPlaces;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "buses" }, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    //    @JsonIgnoreProperties(value = { "buses" }, allowSetters = true)
     private Driver driver;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "buses" }, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    //    @JsonIgnoreProperties(value = { "buses" }, allowSetters = true)
     private Counterpart counterpart;
 
-    @JsonIgnoreProperties(value = { "bus" }, allowSetters = true)
+    //    @JsonIgnoreProperties(value = { "bus", "station", "passengers" }, allowSetters = true)
     @OneToOne(mappedBy = "bus")
     private Route route;
 

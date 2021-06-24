@@ -8,6 +8,10 @@ import StationUpdateComponent from '@/entities/station/station-update.vue';
 import StationClass from '@/entities/station/station-update.component';
 import StationService from '@/entities/station/station.service';
 
+import TypeObjectService from '@/entities/type-object/type-object.service';
+
+import RegionService from '@/entities/region/region.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -35,6 +39,10 @@ describe('Component Tests', () => {
         router,
         provide: {
           stationService: () => stationServiceStub,
+
+          typeObjectService: () => new TypeObjectService(),
+
+          regionService: () => new RegionService(),
         },
       });
       comp = wrapper.vm;

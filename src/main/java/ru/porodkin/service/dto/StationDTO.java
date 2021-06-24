@@ -26,6 +26,12 @@ public class StationDTO implements Serializable {
 
     private Integer distance;
 
+    private StationDTO nextStation;
+
+    private TypeObjectDTO typeObject;
+
+    private RegionDTO region;
+
     public Long getId() {
         return id;
     }
@@ -98,6 +104,30 @@ public class StationDTO implements Serializable {
         this.distance = distance;
     }
 
+    public StationDTO getNextStation() {
+        return nextStation;
+    }
+
+    public void setNextStation(StationDTO nextStation) {
+        this.nextStation = nextStation;
+    }
+
+    public TypeObjectDTO getTypeObject() {
+        return typeObject;
+    }
+
+    public void setTypeObject(TypeObjectDTO typeObject) {
+        this.typeObject = typeObject;
+    }
+
+    public RegionDTO getRegion() {
+        return region;
+    }
+
+    public void setRegion(RegionDTO region) {
+        this.region = region;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -132,6 +162,9 @@ public class StationDTO implements Serializable {
             ", longitude=" + getLongitude() +
             ", latitude=" + getLatitude() +
             ", distance=" + getDistance() +
+            ", nextStation=" + getNextStation() +
+            ", typeObject=" + getTypeObject() +
+            ", region=" + getRegion() +
             "}";
     }
 }

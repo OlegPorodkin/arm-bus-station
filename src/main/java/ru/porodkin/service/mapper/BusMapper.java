@@ -9,8 +9,8 @@ import ru.porodkin.service.dto.BusDTO;
  */
 @Mapper(componentModel = "spring", uses = { DriverMapper.class, CounterpartMapper.class })
 public interface BusMapper extends EntityMapper<BusDTO, Bus> {
-    @Mapping(target = "driver", source = "driver", qualifiedByName = "id")
-    @Mapping(target = "counterpart", source = "counterpart", qualifiedByName = "id")
+    @Mapping(target = "driver", source = "driver")
+    @Mapping(target = "counterpart", source = "counterpart")
     BusDTO toDto(Bus s);
 
     @Named("id")

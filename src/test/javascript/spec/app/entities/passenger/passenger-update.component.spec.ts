@@ -10,6 +10,8 @@ import PassengerService from '@/entities/passenger/passenger.service';
 
 import RouteService from '@/entities/route/route.service';
 
+import PassportService from '@/entities/passport/passport.service';
+
 import TicketService from '@/entities/ticket/ticket.service';
 
 const localVue = createLocalVue();
@@ -41,6 +43,8 @@ describe('Component Tests', () => {
           passengerService: () => passengerServiceStub,
 
           routeService: () => new RouteService(),
+
+          passportService: () => new PassportService(),
 
           ticketService: () => new TicketService(),
         },

@@ -34,6 +34,8 @@ import PassengerService from '@/entities/passenger/passenger.service';
 import PassportService from '@/entities/passport/passport.service';
 import RegionService from '@/entities/region/region.service';
 import RouteService from '@/entities/route/route.service';
+import DispatcherService from '@/dispatcher/dispatcher.service';
+import DispatcherDetails from '@/dispatcher/dispatcher-details.component';
 import StationService from '@/entities/station/station.service';
 import TicketService from '@/entities/ticket/ticket.service';
 import TypeObjectService from '@/entities/type-object/type-object.service';
@@ -100,9 +102,11 @@ new Vue({
     passportService: () => new PassportService(),
     regionService: () => new RegionService(),
     routeService: () => new RouteService(),
+    dispatcherService: () => new DispatcherService(),
     stationService: () => new StationService(),
     ticketService: () => new TicketService(),
     typeObjectService: () => new TypeObjectService(),
+    dispatcherDetails: () => new DispatcherDetails(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },

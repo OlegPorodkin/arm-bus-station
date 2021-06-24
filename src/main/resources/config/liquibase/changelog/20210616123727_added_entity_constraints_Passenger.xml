@@ -14,7 +14,13 @@
                                  referencedColumnNames="id"
                                  referencedTableName="route"/>
 
-        <addForeignKeyConstraint baseColumnNames="id"
+        <addForeignKeyConstraint baseColumnNames="passport_id"
+                                 baseTableName="passenger"
+                                 constraintName="fk_passenger__passport_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="passport"/>
+
+        <addForeignKeyConstraint baseColumnNames="ticket_id"
                                  baseTableName="passenger"
                                  constraintName="fk_passenger__ticket_id"
                                  referencedColumnNames="id"

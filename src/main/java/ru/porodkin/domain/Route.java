@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -14,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "route")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedEntityGraph(name = "route.all", includeAllAttributes = true)
 public class Route implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,11 +51,20 @@ public class Route implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnoreProperties(value = { "driver", "counterpart", "route" }, allowSetters = true)
-    @OneToOne
+    //    @JsonIgnoreProperties(value = { "driver", "counterpart", "route" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id")
     private Bus bus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    //    @JsonIgnoreProperties(value = { "nextStation", "typeObject", "region" }, allowSetters = true)
+    private Station station;
+
+    @OneToMany(mappedBy = "route")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    //    @JsonIgnoreProperties(value = { "route", "passport", "ticket" }, allowSetters = true)
+    private Set<Passenger> passengers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -196,6 +208,50 @@ public class Route implements Serializable {
 
     public void setBus(Bus bus) {
         this.bus = bus;
+    }
+
+    public Station getStation() {
+        return this.station;
+    }
+
+    public Route station(Station station) {
+        this.setStation(station);
+        return this;
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
+    }
+
+    public Set<Passenger> getPassengers() {
+        return this.passengers;
+    }
+
+    public Route passengers(Set<Passenger> passengers) {
+        this.setPassengers(passengers);
+        return this;
+    }
+
+    public Route addPassengers(Passenger passenger) {
+        this.passengers.add(passenger);
+        passenger.setRoute(this);
+        return this;
+    }
+
+    public Route removePassengers(Passenger passenger) {
+        this.passengers.remove(passenger);
+        passenger.setRoute(null);
+        return this;
+    }
+
+    public void setPassengers(Set<Passenger> passengers) {
+        if (this.passengers != null) {
+            this.passengers.forEach(i -> i.setRoute(null));
+        }
+        if (passengers != null) {
+            passengers.forEach(i -> i.setRoute(this));
+        }
+        this.passengers = passengers;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

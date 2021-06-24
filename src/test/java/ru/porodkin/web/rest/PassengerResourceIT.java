@@ -21,9 +21,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import ru.porodkin.IntegrationTest;
-import ru.porodkin.domain.Bus;
 import ru.porodkin.domain.Passenger;
-import ru.porodkin.domain.Ticket;
 import ru.porodkin.repository.PassengerRepository;
 import ru.porodkin.service.dto.PassengerDTO;
 import ru.porodkin.service.mapper.PassengerMapper;
@@ -100,16 +98,6 @@ class PassengerResourceIT {
             .sex(DEFAULT_SEX)
             .phone(DEFAULT_PHONE)
             .citizenship(DEFAULT_CITIZENSHIP);
-        // Add required entity
-        Ticket ticket;
-        if (TestUtil.findAll(em, Ticket.class).isEmpty()) {
-            ticket = TicketResourceIT.createEntity(em);
-            em.persist(ticket);
-            em.flush();
-        } else {
-            ticket = TestUtil.findAll(em, Ticket.class).get(0);
-        }
-        passenger.setTicket(ticket);
         return passenger;
     }
 
@@ -130,16 +118,6 @@ class PassengerResourceIT {
             .sex(UPDATED_SEX)
             .phone(UPDATED_PHONE)
             .citizenship(UPDATED_CITIZENSHIP);
-        // Add required entity
-        Ticket ticket;
-        if (TestUtil.findAll(em, Ticket.class).isEmpty()) {
-            ticket = TicketResourceIT.createUpdatedEntity(em);
-            em.persist(ticket);
-            em.flush();
-        } else {
-            ticket = TestUtil.findAll(em, Ticket.class).get(0);
-        }
-        passenger.setTicket(ticket);
         return passenger;
     }
 
@@ -176,9 +154,6 @@ class PassengerResourceIT {
         assertThat(testPassenger.getSex()).isEqualTo(DEFAULT_SEX);
         assertThat(testPassenger.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testPassenger.getCitizenship()).isEqualTo(DEFAULT_CITIZENSHIP);
-
-        // Validate the id for MapsId, the ids must be same
-        assertThat(testPassenger.getId()).isEqualTo(testPassenger.getTicket().getId());
     }
 
     @Test
@@ -203,49 +178,6 @@ class PassengerResourceIT {
         // Validate the Passenger in the database
         List<Passenger> passengerList = passengerRepository.findAll();
         assertThat(passengerList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    void updatePassengerMapsIdAssociationWithNewId() throws Exception {
-        // Initialize the database
-        passengerRepository.saveAndFlush(passenger);
-        int databaseSizeBeforeCreate = passengerRepository.findAll().size();
-
-        // Add a new parent entity
-        Ticket ticket = TicketResourceIT.createUpdatedEntity(em);
-        em.persist(ticket);
-        em.flush();
-
-        // Load the passenger
-        Passenger updatedPassenger = passengerRepository.findById(passenger.getId()).get();
-        assertThat(updatedPassenger).isNotNull();
-        // Disconnect from session so that the updates on updatedPassenger are not directly saved in db
-        em.detach(updatedPassenger);
-
-        // Update the Ticket with new association value
-        updatedPassenger.setTicket(ticket);
-        PassengerDTO updatedPassengerDTO = passengerMapper.toDto(updatedPassenger);
-        assertThat(updatedPassengerDTO).isNotNull();
-
-        // Update the entity
-        restPassengerMockMvc
-            .perform(
-                put(ENTITY_API_URL_ID, updatedPassengerDTO.getId())
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedPassengerDTO))
-            )
-            .andExpect(status().isOk());
-
-        // Validate the Passenger in the database
-        List<Passenger> passengerList = passengerRepository.findAll();
-        assertThat(passengerList).hasSize(databaseSizeBeforeCreate);
-        Passenger testPassenger = passengerList.get(passengerList.size() - 1);
-        // Validate the id for MapsId, the ids must be same
-        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
-        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
-        // assertThat(testPassenger.getId()).isEqualTo(testPassenger.getTicket().getId());
     }
 
     @Test

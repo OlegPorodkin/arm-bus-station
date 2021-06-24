@@ -36,6 +36,24 @@
       "relationshipType": "one-to-one",
       "ownerSide": false,
       "otherEntityRelationshipName": "ticket"
+    },
+    {
+      "relationshipName": "departure",
+      "otherEntityName": "station",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "name",
+      "ownerSide": true,
+      "id": false,
+      "otherEntityRelationshipName": "ticket"
+    },
+    {
+      "relationshipName": "destination",
+      "otherEntityName": "station",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "name",
+      "ownerSide": true,
+      "id": false,
+      "otherEntityRelationshipName": "ticket"
     }
   ],
   "service": "serviceImpl",

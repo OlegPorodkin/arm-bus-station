@@ -4,13 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.porodkin.domain.Passenger;
+import ru.porodkin.domain.Passenger_;
+import ru.porodkin.domain.Route;
+import ru.porodkin.domain.Route_;
 import ru.porodkin.repository.PassengerRepository;
-import ru.porodkin.repository.TicketRepository;
 import ru.porodkin.service.PassengerService;
 import ru.porodkin.service.dto.PassengerDTO;
 import ru.porodkin.service.mapper.PassengerMapper;
@@ -28,24 +33,15 @@ public class PassengerServiceImpl implements PassengerService {
 
     private final PassengerMapper passengerMapper;
 
-    private final TicketRepository ticketRepository;
-
-    public PassengerServiceImpl(
-        PassengerRepository passengerRepository,
-        PassengerMapper passengerMapper,
-        TicketRepository ticketRepository
-    ) {
+    public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerMapper passengerMapper) {
         this.passengerRepository = passengerRepository;
         this.passengerMapper = passengerMapper;
-        this.ticketRepository = ticketRepository;
     }
 
     @Override
     public PassengerDTO save(PassengerDTO passengerDTO) {
         log.debug("Request to save Passenger : {}", passengerDTO);
         Passenger passenger = passengerMapper.toEntity(passengerDTO);
-        Long ticketId = passengerDTO.getTicket().getId();
-        ticketRepository.findById(ticketId).ifPresent(passenger::ticket);
         passenger = passengerRepository.save(passenger);
         return passengerMapper.toDto(passenger);
     }
@@ -84,5 +80,22 @@ public class PassengerServiceImpl implements PassengerService {
     public void delete(Long id) {
         log.debug("Request to delete Passenger : {}", id);
         passengerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PassengerDTO> findByRoute(Long routeId) {
+        log.debug("Request to get Passenger by Route: {}", routeId);
+        return passengerRepository
+            .findAll(
+                Specification.where(
+                    (root, query, cb) -> {
+                        Join<Passenger, Route> join = root.join(Passenger_.route);
+                        return cb.equal(join.get(Route_.id), routeId);
+                    }
+                )
+            )
+            .stream()
+            .map(passengerMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }

@@ -104,6 +104,45 @@
               v-model.number="$v.station.distance.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="station-nextStation">Next Station</label>
+            <select class="form-control" id="station-nextStation" data-cy="nextStation" name="nextStation" v-model="station.nextStation">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="station.nextStation && stationOption.id === station.nextStation.id ? station.nextStation : stationOption"
+                v-for="stationOption in nextStations"
+                :key="stationOption.id"
+              >
+                {{ stationOption.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="station-typeObject">Type Object</label>
+            <select class="form-control" id="station-typeObject" data-cy="typeObject" name="typeObject" v-model="station.typeObject">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="station.typeObject && typeObjectOption.id === station.typeObject.id ? station.typeObject : typeObjectOption"
+                v-for="typeObjectOption in typeObjects"
+                :key="typeObjectOption.id"
+              >
+                {{ typeObjectOption.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="station-region">Region</label>
+            <select class="form-control" id="station-region" data-cy="region" name="region" v-model="station.region">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="station.region && regionOption.id === station.region.id ? station.region : regionOption"
+                v-for="regionOption in regions"
+                :key="regionOption.id"
+              >
+                {{ regionOption.name }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

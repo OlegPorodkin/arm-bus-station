@@ -32,6 +32,8 @@ public class RouteDTO implements Serializable {
 
     private BusDTO bus;
 
+    private StationDTO station;
+
     public Long getId() {
         return id;
     }
@@ -120,6 +122,14 @@ public class RouteDTO implements Serializable {
         this.bus = bus;
     }
 
+    public StationDTO getStation() {
+        return station;
+    }
+
+    public void setStation(StationDTO station) {
+        this.station = station;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -156,6 +166,7 @@ public class RouteDTO implements Serializable {
             ", routStatus='" + getRoutStatus() + "'" +
             ", description='" + getDescription() + "'" +
             ", bus=" + getBus() +
+            ", station=" + getStation() +
             "}";
     }
 }

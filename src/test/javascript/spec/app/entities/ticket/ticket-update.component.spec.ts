@@ -10,6 +10,8 @@ import TicketService from '@/entities/ticket/ticket.service';
 
 import PassengerService from '@/entities/passenger/passenger.service';
 
+import StationService from '@/entities/station/station.service';
+
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -39,6 +41,8 @@ describe('Component Tests', () => {
           ticketService: () => ticketServiceStub,
 
           passengerService: () => new PassengerService(),
+
+          stationService: () => new StationService(),
         },
       });
       comp = wrapper.vm;

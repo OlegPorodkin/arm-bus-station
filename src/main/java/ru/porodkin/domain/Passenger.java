@@ -13,11 +13,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "passenger")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedEntityGraph(name = "passenger.all", includeAllAttributes = true)
 public class Passenger implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "uuid")
@@ -48,13 +51,17 @@ public class Passenger implements Serializable {
     private String citizenship;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "bus" }, allowSetters = true)
+    //    @JsonIgnoreProperties(value = { "bus", "station", "passengers" }, allowSetters = true)
     private Route route;
 
-    @JsonIgnoreProperties(value = { "passenger" }, allowSetters = true)
+    //    @JsonIgnoreProperties(value = { "passenger" }, allowSetters = true)
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(unique = true)
+    private Passport passport;
+
+    //    @JsonIgnoreProperties(value = { "passenger", "departure", "destination" }, allowSetters = true)
+    @OneToOne
+    @JoinColumn(unique = true)
     private Ticket ticket;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -199,6 +206,19 @@ public class Passenger implements Serializable {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public Passport getPassport() {
+        return this.passport;
+    }
+
+    public Passenger passport(Passport passport) {
+        this.setPassport(passport);
+        return this;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     public Ticket getTicket() {

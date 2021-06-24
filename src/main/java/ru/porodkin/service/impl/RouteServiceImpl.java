@@ -25,7 +25,6 @@ public class RouteServiceImpl implements RouteService {
     private final Logger log = LoggerFactory.getLogger(RouteServiceImpl.class);
 
     private final RouteRepository routeRepository;
-
     private final RouteMapper routeMapper;
 
     private final BusRepository busRepository;

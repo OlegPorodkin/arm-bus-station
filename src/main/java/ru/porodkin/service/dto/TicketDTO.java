@@ -25,6 +25,10 @@ public class TicketDTO implements Serializable {
 
     private Double price;
 
+    private StationDTO departure;
+
+    private StationDTO destination;
+
     public Long getId() {
         return id;
     }
@@ -89,6 +93,22 @@ public class TicketDTO implements Serializable {
         this.price = price;
     }
 
+    public StationDTO getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(StationDTO departure) {
+        this.departure = departure;
+    }
+
+    public StationDTO getDestination() {
+        return destination;
+    }
+
+    public void setDestination(StationDTO destination) {
+        this.destination = destination;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -122,6 +142,8 @@ public class TicketDTO implements Serializable {
             ", type='" + getType() + "'" +
             ", dateDeparture='" + getDateDeparture() + "'" +
             ", price=" + getPrice() +
+            ", departure=" + getDeparture() +
+            ", destination=" + getDestination() +
             "}";
     }
 }

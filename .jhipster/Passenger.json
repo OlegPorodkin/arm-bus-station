@@ -45,12 +45,21 @@
       "otherEntityField": "id"
     },
     {
+      "relationshipName": "passport",
+      "otherEntityName": "passport",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id_passport",
+      "ownerSide": true,
+      "id": false,
+      "otherEntityRelationshipName": "passenger"
+    },
+    {
       "relationshipName": "ticket",
       "otherEntityName": "ticket",
       "relationshipType": "one-to-one",
-      "otherEntityField": "id",
+      "otherEntityField": "id_ticket",
       "ownerSide": true,
-      "id": true,
+      "id": false,
       "otherEntityRelationshipName": "passenger"
     }
   ],

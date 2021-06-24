@@ -1,4 +1,5 @@
 import { IPassenger } from '@/shared/model/passenger.model';
+import { IStation } from '@/shared/model/station.model';
 
 export interface ITicket {
   id?: number;
@@ -10,6 +11,8 @@ export interface ITicket {
   dateDeparture?: Date | null;
   price?: number | null;
   passenger?: IPassenger | null;
+  departure?: IStation | null;
+  destination?: IStation | null;
 }
 
 export class Ticket implements ITicket {
@@ -22,6 +25,8 @@ export class Ticket implements ITicket {
     public type?: string | null,
     public dateDeparture?: Date | null,
     public price?: number | null,
-    public passenger?: IPassenger | null
+    public passenger?: IPassenger | null,
+    public departure?: IStation | null,
+    public destination?: IStation | null
   ) {}
 }

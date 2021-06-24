@@ -38,6 +38,7 @@
             <th scope="row"><span>Phone</span></th>
             <th scope="row"><span>Citizenship</span></th>
             <th scope="row"><span>Route</span></th>
+            <th scope="row"><span>Passport</span></th>
             <th scope="row"><span>Ticket</span></th>
             <th scope="row"></th>
           </tr>
@@ -62,8 +63,17 @@
               </div>
             </td>
             <td>
+              <div v-if="passenger.passport">
+                <router-link :to="{ name: 'PassportView', params: { passportId: passenger.passport.id } }">{{
+                  passenger.passport.id_passport
+                }}</router-link>
+              </div>
+            </td>
+            <td>
               <div v-if="passenger.ticket">
-                <router-link :to="{ name: 'TicketView', params: { ticketId: passenger.ticket.id } }">{{ passenger.ticket.id }}</router-link>
+                <router-link :to="{ name: 'TicketView', params: { ticketId: passenger.ticket.id } }">{{
+                  passenger.ticket.id_ticket
+                }}</router-link>
               </div>
             </td>
             <td class="text-right">

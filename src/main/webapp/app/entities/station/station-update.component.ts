@@ -1,5 +1,11 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
+import TypeObjectService from '@/entities/type-object/type-object.service';
+import { ITypeObject } from '@/shared/model/type-object.model';
+
+import RegionService from '@/entities/region/region.service';
+import { IRegion } from '@/shared/model/region.model';
+
 import { IStation, Station } from '@/shared/model/station.model';
 import StationService from './station.service';
 
@@ -22,6 +28,16 @@ const validations: any = {
 export default class StationUpdate extends Vue {
   @Inject('stationService') private stationService: () => StationService;
   public station: IStation = new Station();
+
+  public stations: IStation[] = [];
+
+  @Inject('typeObjectService') private typeObjectService: () => TypeObjectService;
+
+  public typeObjects: ITypeObject[] = [];
+
+  @Inject('regionService') private regionService: () => RegionService;
+
+  public regions: IRegion[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -30,6 +46,7 @@ export default class StationUpdate extends Vue {
       if (to.params.stationId) {
         vm.retrieveStation(to.params.stationId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -90,5 +107,21 @@ export default class StationUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.stationService()
+      .retrieve()
+      .then(res => {
+        this.stations = res.data;
+      });
+    this.typeObjectService()
+      .retrieve()
+      .then(res => {
+        this.typeObjects = res.data;
+      });
+    this.regionService()
+      .retrieve()
+      .then(res => {
+        this.regions = res.data;
+      });
+  }
 }
